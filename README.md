@@ -10,10 +10,15 @@ We also encourage anyone that has a vested interest in supporting stateful Linux
 
 This specification defines the following six factors of provisioning storage to Linux Containers:
 1. A software spec that can be included as part of the Container spec.  This spec defines the properties of the storage volume, such as a specific class of service and snapshot requirements.  It also allows for an initial format of the volume with the required filesystem and it's properties.
+
 2. A RESTful API for orchestrating the provisioning of a volume, such that it can be driven by the container orchestration software.
+
 3. An interface for binding a volume into a container's namespace.
+
 4. An interface for container granular storage operations.  These include Snapshots, Class of Service (CoS) and Clones.
+
 5. An interface for extracting metrics and logs from the storage provider on a per-volume basis.
+
 6. The User Experience (UX) for for an end user can interact with Open Storage.
 
 # Contributing
