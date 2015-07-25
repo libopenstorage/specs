@@ -10,7 +10,7 @@ We also encourage anyone that has a vested interest in supporting stateful Linux
 
 This specification defines the following six factors of provisioning storage to Linux Containers:
 
-1. A software spec that can be included as part of the Container spec.  This spec defines the properties of the storage volume, such as a specific class of service and snapshot requirements.  It also allows for an initial format of the volume with the required filesystem and its properties.
+1. A vendor agnostic software spec that can be included as part of the Container spec.  This spec defines the properties of the storage volume, such as a specific class of service and snapshot requirements.  It also allows for an initial format of the volume with the required filesystem and its properties.
 
 2. A RESTful API for orchestrating the provisioning of a volume, such that it can be driven by the container orchestration software.
 
