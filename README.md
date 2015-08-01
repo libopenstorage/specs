@@ -1,4 +1,4 @@
-# Lib Open Storage Specifications
+# Open Storage Specifications
 
 This project is about defining an interface to orchestrate the provisioning of storage volumes for Linux containers and creating a specification by which a volume's properties can be defined.  It also provides a UX specification defining how an end user would provision storage for stateful applications deployed in Linux containers.
 
@@ -21,6 +21,16 @@ This specification defines the following six factors of provisioning storage to 
 5. An interface for extracting metrics and logs from the storage provider on a per-volume basis.
 
 6. The User Experience (UX) for an end user to interact with Open Storage.
+
+# What the Open Storage specification actually specifies
+
+Open Storage specifies the following three components of storage integration into Linux containers:
+
+1. The specifics of the integration of a storage volume provider into the container runtime in such a way that the volume driver will work in a multi node, distributed scheduler environment.  This includes a specific driver interface that a driver would need to implement.
+
+2. A JSON and YAML specification for describing the properties of a storage volume.  This specification can be included as part of a container manifest or can be made available to the container scheduling engine some other way.  Either way, the scheduling engine that conforms to the openstorage specification will make this volume spec available to the driver.
+
+3. A user experience guideline for provisioning storage to stateful applications in Linux containers.
 
 # Contributing
 
