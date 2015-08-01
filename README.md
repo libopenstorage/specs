@@ -1,6 +1,6 @@
 # Open Storage Specifications
 
-This project is about defining an interface to orchestrate the provisioning of storage volumes for Linux containers and creating a specification by which a volume's properties can be defined.  It also provides a UX specification defining how an end user would provision storage for stateful applications deployed in Linux containers.
+This project is about defining an interface to orchestrate the provisioning of storage volumes for Linux containers and creating a specification by which a volume's properties can be defined.  It also provides a UX guideline describing how an end user would provision storage for stateful applications deployed in Linux containers.
 
 We hope that this work will align with the Open Containers Project.
 
