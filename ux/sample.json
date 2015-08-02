@@ -5,7 +5,7 @@
 		"Format":"ext4",
 		"BlockSize":4096,
 		"HALevel":1,
-		"Cos":1.
+		"Cos":1.""
 		"Labels": {
 			"key":"value"
 		}
