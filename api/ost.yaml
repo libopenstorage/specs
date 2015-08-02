@@ -1,0 +1,360 @@
+# Openstorage for Containers API spec
+swagger: '2.0'
+info:
+  title: Open Storage for Containers
+  description: Open storage API specification
+  version: "1.0.0"
+# the domain of the service
+host: api.uber.com
+# array of all schemes that your API supports
+schemes:
+  - https
+# will be prefixed to all paths
+basePath: /v1
+produces:
+  - application/json
+paths:
+  /volumes/:
+    get:
+      summary: List of Volumes
+      description: |
+        Returns information on provisioned volumes.
+      parameters:
+        - name: name
+          in: query
+          description: User specified volume name.
+          required: false
+          type: string
+        - name: VolumeLabels
+          in: query
+          description: Comma separated name value pairs
+          required: false
+          type: string
+        - name: uuid
+          in: query
+          description: Volume uuid
+          required: false
+          type: string
+          format: uuid
+      tags:
+        - Enumerate Volumes
+      responses:
+        200:
+          description: An array of Volumes
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Volume'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Create New Volume
+      description: create new volume according to spec
+      parameters:
+        - name: spec
+          in: body
+          description: Volume spec
+          required: true
+          schema:
+            $ref: '#/definitions/VolumeCreateParams'
+      tags:
+        - Create Volume
+      responses:
+        200:
+          description: UUID of neewly created volume
+          schema:
+            $ref: '#/definitions/UUID'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  
+  /volumes/{uuid}:
+    get:
+      summary: Inspect volume
+      description: |
+        Retrieves volume as specified by uuid
+      parameters:
+        - name: uuid
+          in: path
+          description: Volume UUID.
+          required: true
+          type: string
+          format: uuid
+      tags:
+        - Inspect Volume
+      responses:
+        200:
+          description: Volume mapping to uuid
+          schema:
+              $ref: '#/definitions/Volume'
+        default:
+          description: Error retrieving volume
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      summary: Change volume state
+      description: |
+        Attach, detach, format, mount and unmount operations.
+      parameters:
+        - name: uuid
+          in: path
+          description: Volume UUID
+          required: true
+          type: string
+          format: uuid
+        - name: state
+          in: body
+          description: Desired Volume State
+          required: true
+          schema:
+            $ref: '#/definitions/VolumeStateParams'
+      tags:
+        - Volume Mount/Unmount/Attach/Detach/Format
+      responses:
+        200:
+          description: Volume reflecting current state
+          schema:
+              $ref: '#/definitions/Volume'
+        default:
+          description: Error updating volume
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      summary: Delete Volume
+      description: |
+        Delete Volume
+      parameters:
+        - name: uuid
+          in: path
+          description: Volume UUID
+          required: true
+          type: string
+          format: uuid
+      tags:
+        - Delete Volume
+      responses:
+        200:
+          description: Volume Deleted
+          schema:
+              $ref: '#/definitions/UUID'
+        default:
+          description: Error deleting volume
+          schema:
+            $ref: '#/definitions/Error'
+  /volumes/stats/{uuid}:
+    put:
+      summary: Retrieve Volume Stats
+      description: |
+        Retrieve Volume Stats for specified UUID
+      parameters:
+        - name: uuid
+          in: path
+          description: Volume UUID
+          required: true
+          type: string
+          format: uuid
+ 
+      tags:
+        - Volume Stats
+      responses:
+        200:
+          description: Volume Stats
+          schema:
+              $ref: '#/definitions/VolumeStats'
+        default:
+          description: Error Retrieving stats
+          schema:
+            $ref: '#/definitions/Error'
+  /volumes/alerts/{uuid}:
+    get:
+      summary: Retrieve Volume Alerts
+      description: |
+        Retrieve Volume Alerts for specified UUID
+      parameters:
+        - name: uuid
+          in: path
+          description: Volume UUID
+          required: true
+          type: string
+          format: uuid
+ 
+      tags:
+        - Volume Alerts
+      responses:
+        200:
+          description: Volume Alerts
+          schema:
+              $ref: '#/definitions/VolumeAlerts'
+        default:
+          description: Error Retrieving stats
+          schema:
+            $ref: '#/definitions/Error'
+definitions:
+  VolumeCreateParams:
+    properties:
+      locator:
+        $ref: '#/definitions/Locator'
+      spec:
+        $ref: '#/definitions/VolumeSpec'
+      options:
+        $ref: '#/definitions/CreateOptions'
+
+  Volume:
+    properties:
+      uuid:
+        type: string
+        format: uuid
+        description: unique volume uuid
+      locator:
+        $ref: '#/definitions/Locator'
+        description: Volume locator.
+      ctime:
+        type: string
+        description: Creation time.
+      spec:
+        $ref: '#/definitions/VolumeSpec'
+        description: User specified spec.
+      status:
+        type: string
+        description: Volume op status.
+        enum: [ "NotPresent", "Up", "Down", "Degraded" ]
+      state:
+        type: number
+        description: Volume state. 1 -> CreatePending, 2->Available, 4->Attached, 8->Detached, 16->ErrorState, 32->Deleted
+      attached_on:
+        type: string
+        description: node on which volume is attached
+      replicat_set:
+        type: array
+        items:
+          type: string
+        description: list of nodes where data is erasure coded
+      device_path:
+        type: string
+        description: attach path for block devices
+      mount_path:
+        type: array
+        items: 
+          type: string
+        description: paths at which the volumes is mounted
+      error:
+        type: string
+        description: last error on this volume
+        
+  VolumeSpec:
+    properties:
+      ephemeral:
+        type: boolean
+        description: True for ephemeral disks
+      size:
+        type: number
+        format: int64
+        description: Maximum size 
+      blocksize:
+        type: number
+        format: int32
+        description: Desired fs block size
+        enum: ["xfs", "ext4", "zfs", "none"]
+      halevel:
+        type: number
+        description: A number specifying the number of nodes that are allowed to fail and data be still available.
+      cos:
+        type: number
+        minimum: 1
+        maximum: 10
+        description: A number between 1 and 10 that specified a class of service.
+      dedupe:
+        type: boolean
+        description: Enable or disable deduplication.
+      snapshot_interval:
+        type: number
+        description: A number in minutes specifying how oftene snapshots should be taken. 0 disables snapshots.
+      snapshot_depth:
+        type: number
+        description: Number of snapshots to keep.
+      config_labels:
+        type: array
+        items:
+          $ref: '#/definitions/NameValuePair'
+        description: Arbitrary name value configuration pairs.
+        
+  CreateOptions:
+    properties:
+      first_name:
+        type: string
+        description: First name of the Uber user.
+      last_name:
+        type: string
+        description: Last name of the Uber user.
+      email:
+        type: string
+        description: Email address of the Uber user
+      picture:
+        type: string
+        description: Image URL of the Uber user.
+      promo_code:
+        type: string
+        description: Promo code of the Uber user.
+  Locator:
+    properties:
+      name:
+        type: string
+        description: user assigned name
+      labels:
+        type: string
+        description: comma seperated name value pairs
+  VolumeStateParams:
+     properties:
+        mount:
+          type: integer
+          format: int32
+          description: 1 to mount, 2 to unmount
+        format:
+          type: integer
+          format: int32
+          description: 1 to format
+        attach:
+          type: integer
+          format: int32
+          description: 1 to attach, 2 to detach
+        mountpath:
+          type: string
+          description: path to mount the device
+    
+  UUID:
+    properties:
+      name:
+        type: string
+        description: volume UUID
+        format: uuid
+        
+  NameValuePair:
+    properties:
+      name:
+        type: string
+        description: Name
+      value:
+        type: string
+        description: Value
+    
+  VolumeStats:
+    properties:
+      stats:
+          type: array
+          items:
+              $ref: '#/definitions/NameValuePair'
+          description: Stats name and value array
+  VolumeAlerts:
+    properties:
+      stats:
+          type: array
+          items:
+              $ref: '#/definitions/NameValuePair'
+          description: Alerts name and description array
+  Error:
+    properties:
+      error:
+        type: string
