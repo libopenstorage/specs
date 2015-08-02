@@ -288,8 +288,9 @@ definitions:
         description: Fail if volume with matching locator exists.
       create_from_snap::
         type: string
-		format: uuid
-        description:Volume is created as a clone of snapshot specified by uuid
+        format: uuid
+        description: create volume from specified snapshot
+		   
   Locator:
     properties:
       name:
