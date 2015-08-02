@@ -1,10 +1,10 @@
 # Open Storage Specifications
 
-This project is about defining an interface to orchestrate the provisioning of storage volumes for Linux containers in a distributed, multi-node environment, and creating a specification by which a volume's properties can be defined.  It also provides a UX guideline describing how an end user would provision storage for stateful applications deployed in Linux containers.
+Libopenstorage defines a specification to provision and manage  storage volumes for Linux containers in a distributed, multi-node environment.  It also provides a UX guideline for provisioning storage for stateful applications deployed in Linux containers.
 
-We hope that this work will align with the Open Containers Project.
+We hope that this work aligns with the Open Containers Project.
 
-We also encourage anyone that has a vested interest in supporting stateful Linux containers to join this effort. 
+We also encourage anyone that has an interest in supporting stateful Linux containers to join this effort. 
 
 # The Six Factors of Storage for Linux Containers
 
