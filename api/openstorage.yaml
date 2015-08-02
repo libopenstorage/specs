@@ -37,7 +37,7 @@ paths:
           type: string
           format: uuid
       tags:
-        - Enumerate Volumes
+        - Volume Enumerate
       responses:
         200:
           description: An array of Volumes
@@ -60,7 +60,7 @@ paths:
           schema:
             $ref: '#/definitions/VolumeCreateParams'
       tags:
-        - Create Volume
+        - Volume Create
       responses:
         200:
           description: UUID of neewly created volume
@@ -84,7 +84,7 @@ paths:
           type: string
           format: uuid
       tags:
-        - Inspect Volume
+        - Volume Inspect
       responses:
         200:
           description: Volume mapping to uuid
@@ -134,7 +134,7 @@ paths:
           type: string
           format: uuid
       tags:
-        - Delete Volume
+        - Volume Delete
       responses:
         200:
           description: Volume Deleted
@@ -290,7 +290,6 @@ definitions:
         type: string
         format: uuid
         description: create volume from specified snapshot
-		   
   Locator:
     properties:
       name:
