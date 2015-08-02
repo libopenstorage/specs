@@ -283,21 +283,13 @@ definitions:
         
   CreateOptions:
     properties:
-      first_name:
+      fail_if_exists:
+        type: boolean
+        description: Fail if volume with matching locator exists.
+      create_from_snap::
         type: string
-        description: First name of the Uber user.
-      last_name:
-        type: string
-        description: Last name of the Uber user.
-      email:
-        type: string
-        description: Email address of the Uber user
-      picture:
-        type: string
-        description: Image URL of the Uber user.
-      promo_code:
-        type: string
-        description: Promo code of the Uber user.
+		format: uuid
+        description:Volume is created as a clone of snapshot specified by uuid
   Locator:
     properties:
       name:
