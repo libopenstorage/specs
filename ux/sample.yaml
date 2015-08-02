@@ -1,0 +1,10 @@
+---
+  Sample:
+    Ephemeral: true
+    Size: 10
+    Format: "ext4"
+    BlockSize: 4096
+    HALevel: 1
+    Cos: 1
+    Labels:
+      Key: "value"
