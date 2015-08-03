@@ -192,6 +192,113 @@ paths:
           description: Error Retrieving stats
           schema:
             $ref: '#/definitions/Error'
+  /snapshots/:
+    get:
+      summary: List of snapshots
+      description: |
+        Returns information on snapshots
+      parameters:
+        - name: name
+          in: query
+          description: Volume name that maps to this snap
+          required: false
+          type: string
+        - name: VolumeLabels
+          in: query
+          description: Comma separated volume labels
+          required: false
+          type: string
+        - name: SnapLabels
+          in: query
+          description: Comma separated snap labels
+          required: false
+          type: string
+        - name: uuid
+          in: query
+          description: Snap uuid
+          required: false
+          type: string
+          format: uuid
+      tags:
+        - Snap Enumerate
+      responses:
+        200:
+          description: An array of VolumeSnap
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/VolumeSnap'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Create New Snapshot
+      description: create new volume according to spec
+      parameters:
+        - name: snapParams
+          in: body
+          description: Snapshot Params
+          required: true
+          schema:
+            $ref: '#/definitions/SnapCreateParams'
+      tags:
+        - Snapshot Create
+      responses:
+        200:
+          description: UUID of neewly created snapshot
+          schema:
+            $ref: '#/definitions/UUID'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  
+  /snapshots/{uuid}:
+    get:
+      summary: Inspect Snapshot
+      description: |
+        Retrieves snapshot as specified by uuid
+      parameters:
+        - name: uuid
+          in: path
+          description: Snap UUID.
+          required: true
+          type: string
+          format: uuid
+      tags:
+        - Snapshot Inspect
+      responses:
+        200:
+          description: Snapshot mapping to uuid
+          schema:
+              $ref: '#/definitions/VolumeSnap'
+        default:
+          description: Error retrieving snapshot
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      summary: Delete Snapshot
+      description: |
+        Delete Snapshot
+      parameters:
+        - name: uuid
+          in: path
+          description: Volume UUID
+          required: true
+          type: string
+          format: uuid
+      tags:
+        - Snapshot Delete
+      responses:
+        200:
+          description: Snapshot Deleted
+          schema:
+              $ref: '#/definitions/UUID'
+        default:
+          description: Error deleting snapshot.
+          schema:
+            $ref: '#/definitions/Error'
 definitions:
   VolumeCreateParams:
     properties:
@@ -201,7 +308,6 @@ definitions:
         $ref: '#/definitions/VolumeSpec'
       options:
         $ref: '#/definitions/CreateOptions'
-
   Volume:
     properties:
       uuid:
@@ -224,10 +330,21 @@ definitions:
       state:
         type: number
         description: Volume state. 1 -> CreatePending, 2->Available, 4->Attached, 8->Detached, 16->ErrorState, 32->Deleted
+      format:
+        type: string
+        description: Filesystem for this volume
+        enum: [ "xfs", "ext4", "zfs", "none" ]
+      usage:
+        type: number
+        format: int64
+        description: physical blocks used on this volume
+      scan_time:
+        type: string
+        description: Last time this volume was scanned for data integrity.
       attached_on:
         type: string
         description: node on which volume is attached
-      replicat_set:
+      replica_set:
         type: array
         items:
           type: string
@@ -257,7 +374,6 @@ definitions:
         type: number
         format: int32
         description: Desired fs block size
-        enum: ["xfs", "ext4", "zfs", "none"]
       halevel:
         type: number
         description: A number specifying the number of nodes that are allowed to fail and data be still available.
@@ -350,3 +466,39 @@ definitions:
     properties:
       error:
         type: string
+
+  VolumeSnap:
+    properties:
+      uuid:
+        type: string
+        format: uuid
+        description: unique snap UUID
+      volume_uuid:
+        type: string
+        format: uuid
+        description: Volume UUID that maps to this snapshot
+      ctime:
+        type: string
+        description: Creation time.
+      usage:
+        type: number
+        format: int64
+        description: physical blocks used for this snap
+      snap_labels:
+        type: array
+        items:
+          $ref: '#/definitions/NameValuePair'
+        description: Arbitrary name value pairs.
+        
+  SnapCreateParams:
+    properties:
+      uuid:
+        type: string
+        format: uuid
+        description: UUID of volume to snap
+      labels:
+        type: array
+        items:
+          $ref: '#/definitions/NameValuePair'
+        description: Arbitrary name value pairs.
+
