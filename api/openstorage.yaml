@@ -308,7 +308,7 @@ paths:
           in: body
           description: Hostname of the machine joining the cluster.
           required: true
-          type string
+          type: string
         - ip: string
           in: body
           description: IP address in ipv4 notation.
