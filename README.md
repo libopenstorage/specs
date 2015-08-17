@@ -16,11 +16,11 @@ This specification defines the following six factors of provisioning storage to 
 
 3. An interface for binding a volume into a container's namespace.
 
-4. An interface for container granular storage operations.  These include Snapshots, Class of Service (CoS) and Clones.
+4. An interface for operating in a multi node environment.  This interface can be integrated with the distributed multi node container scheduler.
 
-5. An interface for extracting metrics and logs from the storage provider on a per-volume basis.
+5. An interface for container granular storage operations.  These include Snapshots, Class of Service (CoS) and Clones.
 
-6. The User Experience (UX) for an end user to interact with Open Storage.
+6. An interface for extracting metrics and logs from the storage provider on a per-volume basis.
 
 # What the Open Storage specification actually specifies
 
