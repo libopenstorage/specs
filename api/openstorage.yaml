@@ -299,6 +299,20 @@ paths:
           description: Error deleting snapshot.
           schema:
             $ref: '#/definitions/Error'
+  /nodes/:
+    post:
+      summary: Add a new node to the cluster.
+      description: a new node is joining the cluster
+    parameters:
+      - name: name
+        in: body
+        description: Hostname of the machine joining the cluster.
+        required: true
+        type string
+      - ip: string
+        in: body
+        description: IP address in ipv4 notation.
+        required: truet comm
 definitions:
   VolumeCreateParams:
     properties:
