@@ -313,11 +313,13 @@ paths:
           in: body
           description: IP address in ipv4 notation.
           required: true
+      tags:
+        - Add Node
       responses:
         200:
           description: Node addition acknowlegded.
-            schema:
-              $ref: '#/definitions/UUID'
+          schema:
+            $ref: '#/definitions/UUID'
         default:
           description: Error retrieving snapshot
           schema:
