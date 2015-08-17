@@ -299,20 +299,29 @@ paths:
           description: Error deleting snapshot.
           schema:
             $ref: '#/definitions/Error'
-  /nodes/:
+  /nodes/{uuid}:
     post:
       summary: Add a new node to the cluster.
       description: a new node is joining the cluster
-    parameters:
-      - name: name
-        in: body
-        description: Hostname of the machine joining the cluster.
-        required: true
-        type string
-      - ip: string
-        in: body
-        description: IP address in ipv4 notation.
-        required: truet comm
+      parameters:
+        - name: name
+          in: body
+          description: Hostname of the machine joining the cluster.
+          required: true
+          type string
+        - ip: string
+          in: body
+          description: IP address in ipv4 notation.
+          required: true
+      responses:
+        200:
+          description: Node addition acknowlegded.
+            schema:
+              $ref: '#/definitions/UUID'
+        default:
+          description: Error retrieving snapshot
+          schema:
+            $ref: '#/definitions/Error'
 definitions:
   VolumeCreateParams:
     properties:
