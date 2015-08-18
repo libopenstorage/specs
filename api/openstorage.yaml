@@ -299,20 +299,22 @@ paths:
           description: Error deleting snapshot.
           schema:
             $ref: '#/definitions/Error'
-  /nodes/{uuid}:
+  /nodes/:
     post:
       summary: Add a new node to the cluster.
-      description: a new node is joining the cluster
+      description: Node Delete
       parameters:
         - name: name
           in: body
           description: Hostname of the machine joining the cluster.
           required: true
           type: string
-        - ip: string
+        -name: spec
           in: body
-          description: IP address in ipv4 notation.
+          description: Node Spec
           required: true
+          schema:
+            $ref: '#/definitions/NodeSpec'
       tags:
         - Add Node
       responses:
@@ -321,7 +323,54 @@ paths:
           schema:
             $ref: '#/definitions/UUID'
         default:
-          description: Error retrieving snapshot
+          description: Error adding node
+          schema:
+            $ref: '#/definitions/Error'
+  /nodes/{uuid}:
+    put:
+      summary: Update the status of a node in the cluster.
+      description: Node Update
+      parameters:
+        - name: uuid
+          in: path
+          description: Node UUID
+          required: true
+          type: string
+        -name: spec
+          in: body
+          description: Node Spec
+          required: true
+          schema:
+            $ref: '#/definitions/NodeSpec'
+      tags:
+        - Update Node
+      responses:
+        200:
+          description: Node update acknowlegded.
+          schema:
+            $ref: '#/definitions/UUID'
+        default:
+          description: Error updating node
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      summary: Delete a node in the cluster.
+      description: Node Delete
+      parameters:
+        - name: uuid
+          in: path
+          description: Node UUID
+          required: true
+          type: string
+      tags:
+        - Delete Node
+      responses:
+        200:
+          description: Node delete acknowlegded.
+          schema:
+            $ref: '#/definitions/UUID'
+        default:
+          description: Error deleting node
           schema:
             $ref: '#/definitions/Error'
 definitions:
@@ -526,4 +575,34 @@ definitions:
         items:
           $ref: '#/definitions/NameValuePair'
         description: Arbitrary name value pairs.
+        
+  NodeSpec:
+    properties:
+      ip:
+        type: string
+        description: IP address of the node
+      devices:
+        type: array
+        items:
+          $ref: '#/definitions/DevSpec'
+        description: Physical devices attached to this node.
+      cpu:
+        type: number
+        format: int64
+        description: CPU percentage average since the last sample.
+      memory:
+        type: number
+        format: int64
+        description: Memory available on this node in GB.
+
+  DevSpec:
+    properties:
+      capacity:
+        type: number
+        format: int64
+        description: Disk space available on this device, in GB.
+      iops:
+        type: number
+        format: int64
+        description: Current average IOPS this device is capable of delivering.
 
