@@ -336,7 +336,7 @@ paths:
           description: Node UUID
           required: true
           type: string
-        -name: spec
+        - name: spec
           in: body
           description: Node Spec
           required: true
