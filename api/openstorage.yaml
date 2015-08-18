@@ -18,11 +18,11 @@ paths:
     get:
       summary: List of Volumes
       description: |
-        Returns information on provisioned volumes.
+        Returns information on provisioned volumes
       parameters:
         - name: name
           in: query
-          description: User specified volume name.
+          description: User specified volume name
           required: false
           type: string
         - name: VolumeLabels
@@ -51,7 +51,7 @@ paths:
             $ref: '#/definitions/Error'
     post:
       summary: Create New Volume
-      description: create new volume according to spec
+      description: Create new volume according to spec
       parameters:
         - name: spec
           in: body
@@ -75,11 +75,11 @@ paths:
     get:
       summary: Inspect volume
       description: |
-        Retrieves volume as specified by uuid
+        Retrieves volume as specified by UUID
       parameters:
         - name: uuid
           in: path
-          description: Volume UUID.
+          description: Volume UUID
           required: true
           type: string
           format: uuid
@@ -87,7 +87,7 @@ paths:
         - Volume Inspect
       responses:
         200:
-          description: Volume mapping to uuid
+          description: Volume mapping to UUID
           schema:
               $ref: '#/definitions/Volume'
         default:
@@ -97,7 +97,7 @@ paths:
     put:
       summary: Change volume state
       description: |
-        Attach, detach, format, mount and unmount operations.
+        Attach, detach, format, mount and unmount operations
       parameters:
         - name: uuid
           in: path
@@ -215,7 +215,7 @@ paths:
           type: string
         - name: uuid
           in: query
-          description: Snap uuid
+          description: Snap UUID
           required: false
           type: string
           format: uuid
@@ -223,7 +223,7 @@ paths:
         - Snap Enumerate
       responses:
         200:
-          description: An array of VolumeSnap
+          description: An array of VolumeSnaps
           schema:
             type: array
             items:
@@ -234,7 +234,7 @@ paths:
             $ref: '#/definitions/Error'
     post:
       summary: Create New Snapshot
-      description: create new volume according to spec
+      description: Create new volume according to spec
       parameters:
         - name: snapParams
           in: body
@@ -258,11 +258,11 @@ paths:
     get:
       summary: Inspect Snapshot
       description: |
-        Retrieves snapshot as specified by uuid
+        Retrieves snapshot as specified by UUID
       parameters:
         - name: uuid
           in: path
-          description: Snap UUID.
+          description: Snap UUID
           required: true
           type: string
           format: uuid
@@ -296,20 +296,20 @@ paths:
           schema:
               $ref: '#/definitions/UUID'
         default:
-          description: Error deleting snapshot.
+          description: Error deleting snapshot
           schema:
             $ref: '#/definitions/Error'
   /nodes/:
     post:
-      summary: Add a new node to the cluster.
+      summary: Add a new node to the cluster
       description: Node Delete
       parameters:
         - name: name
           in: body
-          description: Hostname of the machine joining the cluster.
+          description: Hostname of the machine joining the cluster
           required: true
           type: string
-        -name: spec
+       - name: spec
           in: body
           description: Node Spec
           required: true
@@ -319,7 +319,7 @@ paths:
         - Add Node
       responses:
         200:
-          description: Node addition acknowlegded.
+          description: Node addition acknowlegded
           schema:
             $ref: '#/definitions/UUID'
         default:
@@ -328,7 +328,7 @@ paths:
             $ref: '#/definitions/Error'
   /nodes/{uuid}:
     put:
-      summary: Update the status of a node in the cluster.
+      summary: Update the status of a node in the cluster
       description: Node Update
       parameters:
         - name: uuid
@@ -346,7 +346,7 @@ paths:
         - Update Node
       responses:
         200:
-          description: Node update acknowlegded.
+          description: Node update acknowlegded
           schema:
             $ref: '#/definitions/UUID'
         default:
@@ -354,7 +354,7 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     delete:
-      summary: Delete a node in the cluster.
+      summary: Delete a node in the cluster
       description: Node Delete
       parameters:
         - name: uuid
@@ -366,7 +366,7 @@ paths:
         - Delete Node
       responses:
         200:
-          description: Node delete acknowlegded.
+          description: Node delete acknowlegded
           schema:
             $ref: '#/definitions/UUID'
         default:
@@ -387,19 +387,19 @@ definitions:
       uuid:
         type: string
         format: uuid
-        description: unique volume uuid
+        description: unique volume UUID
       locator:
         $ref: '#/definitions/Locator'
-        description: Volume locator.
+        description: Volume locator
       ctime:
         type: string
-        description: Creation time.
+        description: Creation time
       spec:
         $ref: '#/definitions/VolumeSpec'
-        description: User specified spec.
+        description: User specified spec
       status:
         type: string
-        description: Volume op status.
+        description: Volume op status
         enum: [ "NotPresent", "Up", "Down", "Degraded" ]
       state:
         type: number
@@ -411,29 +411,29 @@ definitions:
       usage:
         type: number
         format: int64
-        description: physical blocks used on this volume
+        description: Physical blocks used on this volume
       scan_time:
         type: string
-        description: Last time this volume was scanned for data integrity.
+        description: Last time this volume was scanned for data integrity
       attached_on:
         type: string
-        description: node on which volume is attached
+        description: Node on which volume is attached
       replica_set:
         type: array
         items:
           type: string
-        description: list of nodes where data is erasure coded
+        description: List of nodes where data is erasure coded
       device_path:
         type: string
-        description: attach path for block devices
+        description: Attach path for block devices
       mount_path:
         type: array
         items: 
           type: string
-        description: paths at which the volumes is mounted
+        description: Paths at which the volumes is mounted
       error:
         type: string
-        description: last error on this volume
+        description: Last error on this volume
         
   VolumeSpec:
     properties:
@@ -450,32 +450,32 @@ definitions:
         description: Desired fs block size
       halevel:
         type: number
-        description: A number specifying the number of nodes that are allowed to fail and data be still available.
+        description: A number specifying the number of nodes that are allowed to fail and data be still available
       cos:
         type: number
         minimum: 1
         maximum: 10
-        description: A number between 1 and 10 that specified a class of service.
+        description: A number between 1 and 10 that specified a class of service
       dedupe:
         type: boolean
-        description: Enable or disable deduplication.
+        description: Enable or disable deduplication
       snapshot_interval:
         type: number
-        description: A number in minutes specifying how oftene snapshots should be taken. 0 disables snapshots.
+        description: A number in minutes specifying how oftene snapshots should be taken. 0 disables snapshots
       snapshot_depth:
         type: number
-        description: Number of snapshots to keep.
+        description: Number of snapshots to keep
       config_labels:
         type: array
         items:
           $ref: '#/definitions/NameValuePair'
-        description: Arbitrary name value configuration pairs.
+        description: Arbitrary name value configuration pairs
         
   CreateOptions:
     properties:
       fail_if_exists:
         type: boolean
-        description: Fail if volume with matching locator exists.
+        description: Fail if volume with matching locator exists
       create_from_snap::
         type: string
         format: uuid
@@ -504,13 +504,13 @@ definitions:
           description: 1 to attach, 2 to detach
         mountpath:
           type: string
-          description: path to mount the device
+          description: Path to mount the device
     
   UUID:
     properties:
       name:
         type: string
-        description: volume UUID
+        description: Volume UUID
         format: uuid
         
   NameValuePair:
@@ -546,23 +546,23 @@ definitions:
       uuid:
         type: string
         format: uuid
-        description: unique snap UUID
+        description: Unique snap UUID
       volume_uuid:
         type: string
         format: uuid
         description: Volume UUID that maps to this snapshot
       ctime:
         type: string
-        description: Creation time.
+        description: Creation time
       usage:
         type: number
         format: int64
-        description: physical blocks used for this snap
+        description: Physical blocks used for this snap
       snap_labels:
         type: array
         items:
           $ref: '#/definitions/NameValuePair'
-        description: Arbitrary name value pairs.
+        description: Arbitrary name value pairs
         
   SnapCreateParams:
     properties:
@@ -574,7 +574,7 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/NameValuePair'
-        description: Arbitrary name value pairs.
+        description: Arbitrary name value pairs
         
   NodeSpec:
     properties:
@@ -585,24 +585,24 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/DevSpec'
-        description: Physical devices attached to this node.
+        description: Physical devices attached to this node
       cpu:
         type: number
         format: int64
-        description: CPU percentage average since the last sample.
+        description: CPU percentage average since the last sample
       memory:
         type: number
         format: int64
-        description: Memory available on this node in GB.
+        description: Memory available on this node in GB
 
   DevSpec:
     properties:
       capacity:
         type: number
         format: int64
-        description: Disk space available on this device, in GB.
+        description: Disk space available on this device, in GB
       iops:
         type: number
         format: int64
-        description: Current average IOPS this device is capable of delivering.
+        description: Current average IOPS this device is capable of delivering
 
