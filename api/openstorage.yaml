@@ -305,7 +305,7 @@ paths:
       description: Node Delete
       parameters:
         - name: name
-          in: body
+          in: query
           description: Hostname of the machine joining the cluster
           required: true
           type: string
@@ -363,6 +363,7 @@ paths:
           description: Node UUID
           required: true
           type: string
+          format: uuid
       tags:
         - Delete Node
       responses:
