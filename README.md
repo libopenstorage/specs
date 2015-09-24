@@ -29,6 +29,9 @@ Open Storage specifies the following three components of storage integration int
 1. The specifics of the integration of a storage volume provider into the container runtime in such a way that the volume driver will work in a multi node, distributed scheduler environment.  This includes a specific driver interface that a driver would need to implement.  This part of the spec also covers how to handle quiesce a running container so that the volumes can be made stable for a clone, snapshot or backup operation.
 
 2. A JSON and YAML specification for describing the properties of a storage volume.  This specification can be included as part of a container manifest or can be made available to the container scheduling engine some other way.  Either way, the scheduling engine that conforms to the openstorage specification will make this volume spec available to the driver.
+ 
+### Reference implementation.
+A reference implementation is available [here](https://github.com/libopenstorage/openstorage).
 
 # Contributing
 
