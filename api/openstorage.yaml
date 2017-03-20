@@ -1,54 +1,219 @@
-# Openstorage for Containers API spec
 swagger: '2.0'
 info:
   title: Open Storage for Containers
   description: Open storage API specification
-  version: "1.0.0"
-# the domain of the service
-host: api.uber.com
-# array of all schemes that your API supports
+  version: 1.0.0
+host: localhost
 schemes:
   - https
-# will be prefixed to all paths
-basePath: /v1
 produces:
   - application/json
 paths:
-  /volumes/:
+  /cluster/versions/:
+    get:
+      summary: List of versions
+      tags:
+        - Clusters
+      responses:
+        '200':
+          description: An array of version strings
+          schema:
+            type: array
+            items:
+              type: string
+  /v1/cluster/enumerate/:
+    get:
+      summary: Retrieve cluster information
+      description: |
+        Returns information on the cluster
+      tags:
+        - Clusters
+      responses:
+        '200':
+          description: The cluster details
+          schema:
+            $ref: '#/definitions/Cluster'
+  /v1/cluster/gossipstate/:
+    get:
+      summary: Retrieve cluster gossipstate
+      description: |
+        Returns information on the clusters gossip state
+      tags:
+        - Clusters
+      responses:
+        '200':
+          description: Cluster state
+          schema:
+            $ref: '#/definitions/ClusterState'
+  /v1/cluster/status/:
+    get:
+      summary: Retrieve cluster status
+      description: |
+        Returns information on the cluster status
+      parameters:
+        - name: name
+          in: query
+          required: true
+          type: string
+      tags:
+        - Clusters
+      responses:
+        '200':
+          description: Cluster status
+          schema:
+            $ref: '#/definitions/ClusterState'
+  /v1/cluster/peerstatus/:
+    get:
+      summary: Retrieve peer node information
+      description: |
+        Returns information on the peer node status
+      parameters:
+        - name: name
+          in: query
+          required: true
+          type: string
+      tags:
+        - Clusters
+      responses:
+        '200':
+          description: Peer node status
+          schema:
+            $ref: '#/definitions/ClusterState'
+  /v1/cluster/inspect/{uuid}/:
+    get:
+      summary: Retrieve cluster node stats
+      description: |
+        Returns stats for the specified node
+      parameters:
+        - name: uuid
+          in: path
+          description: Node UUID
+          required: true
+          type: string
+          format: uuid
+      tags:
+        - Clusters
+      responses:
+        '200':
+          description: Stats
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/StatPoint'
+  /v1/cluster/{uuid}/:
+    delete:
+      summary: Delete node
+      description: |
+        Removes a node from the cluster
+      parameters:
+        - name: uuid
+          in: path
+          description: Node UUID
+          required: true
+          type: string
+          format: uuid
+      responses:
+        '202':
+          description: Accepted
+      tags:
+        - Clusters
+  /v1/cluster/:
+    delete:
+      summary: Delete cluster
+      responses:
+        '202':
+          description: Accepted
+      tags:
+        - Clusters
+  /v1/cluster/enablegossip/:
+    put:
+      summary: Enables gossip
+      responses:
+        '202':
+          description: Accepted
+      tags:
+        - Clusters
+  /v1/cluster/disablegossip/:
+    put:
+      summary: Disables gossip
+      responses:
+        '202':
+          description: Accepted
+      tags:
+        - Clusters
+  /v1/cluster/shutdown/{uuid}/:
+    put:
+      summary: Shutdown node
+      description: |
+        Removes a node from the cluster
+      parameters:
+        - name: uuid
+          in: path
+          description: Node UUID
+          required: true
+          type: string
+          format: uuid
+      responses:
+        '202':
+          description: Accepted
+      tags:
+        - Clusters
+  /v1/cluster/shutdown/:
+    put:
+      summary: Shutdown cluster
+      responses:
+        '202':
+          description: Accepted
+      tags:
+        - Clusters
+  /osd-volumes/versions/:
+    get:
+      summary: List of versions
+      tags:
+        - Volumes
+      responses:
+        '200':
+          description: An array of version strings
+          schema:
+            type: array
+            items:
+              type: string
+  /v1/osd-volumes/:
     get:
       summary: List of Volumes
       description: |
         Returns information on provisioned volumes
       parameters:
-        - name: name
+        - name: Name
           in: query
           description: User specified volume name
           required: false
           type: string
-        - name: VolumeLabels
+        - name: Label
           in: query
           description: Comma separated name value pairs
           required: false
           type: string
-        - name: uuid
+        - name: ConfigLabel
+          in: query
+          description: Comma separated name value pairs
+          required: false
+          type: string
+        - name: VolumeID
           in: query
           description: Volume uuid
           required: false
           type: string
           format: uuid
       tags:
-        - Volume Enumerate
+        - Volumes
       responses:
-        200:
+        '200':
           description: An array of Volumes
           schema:
             type: array
             items:
               $ref: '#/definitions/Volume'
-        default:
-          description: Error
-          schema:
-            $ref: '#/definitions/Error'
     post:
       summary: Create New Volume
       description: Create new volume according to spec
@@ -58,20 +223,15 @@ paths:
           description: Volume spec
           required: true
           schema:
-            $ref: '#/definitions/VolumeCreateParams'
+            $ref: '#/definitions/VolumeCreateRequest'
       tags:
-        - Volume Create
+        - Volumes
       responses:
-        200:
+        '200':
           description: UUID of neewly created volume
           schema:
-            $ref: '#/definitions/UUID'
-        default:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-  
-  /volumes/{uuid}:
+            $ref: '#/definitions/VolumeCreateResponse'
+  /v1/osd-volumes/{uuid}/:
     get:
       summary: Inspect volume
       description: |
@@ -84,16 +244,12 @@ paths:
           type: string
           format: uuid
       tags:
-        - Volume Inspect
+        - Volumes
       responses:
-        200:
-          description: Volume mapping to UUID
+        '200':
+          description: Volume
           schema:
-              $ref: '#/definitions/Volume'
-        default:
-          description: Error retrieving volume
-          schema:
-            $ref: '#/definitions/Error'
+            $ref: '#/definitions/Volume'
     put:
       summary: Change volume state
       description: |
@@ -112,16 +268,12 @@ paths:
           schema:
             $ref: '#/definitions/VolumeStateParams'
       tags:
-        - Volume Mount/Unmount/Attach/Detach/Format
+        - Volumes
       responses:
-        200:
+        '200':
           description: Volume reflecting current state
           schema:
-              $ref: '#/definitions/Volume'
-        default:
-          description: Error updating volume
-          schema:
-            $ref: '#/definitions/Error'
+            $ref: '#/definitions/Volume'
     delete:
       summary: Delete Volume
       description: |
@@ -134,18 +286,26 @@ paths:
           type: string
           format: uuid
       tags:
-        - Volume Delete
+        - Volumes
       responses:
-        200:
+        '200':
           description: Volume Deleted
           schema:
-              $ref: '#/definitions/UUID'
-        default:
-          description: Error deleting volume
+            $ref: '#/definitions/UUID'
+  /v1/osd-volumes/stats/:
+    get:
+      summary: Retrieve Volume Stats
+      description: |
+        Retrieve Volume Stats
+      tags:
+        - Volumes
+      responses:
+        '200':
+          description: Volume Stats
           schema:
-            $ref: '#/definitions/Error'
-  /volumes/stats/{uuid}:
-    put:
+            $ref: '#/definitions/VolumeStats'
+  /v1/osd-volumes/stats/{uuid}/:
+    get:
       summary: Retrieve Volume Stats
       description: |
         Retrieve Volume Stats for specified UUID
@@ -156,19 +316,59 @@ paths:
           required: true
           type: string
           format: uuid
- 
       tags:
-        - Volume Stats
+        - Volumes
       responses:
-        200:
-          description: Volume Stats
+        '200':
+          description: Volume stats
           schema:
-              $ref: '#/definitions/VolumeStats'
-        default:
-          description: Error Retrieving stats
+            $ref: '#/definitions/VolumeStats'
+  /v1/osd-volumes/usedsize/:
+    get:
+      summary: Retrieves volumes used space size
+      description: |
+        Retrieve Volume Stats
+      tags:
+        - Volumes
+      responses:
+        '200':
+          description: Volumes used space sizes
           schema:
-            $ref: '#/definitions/Error'
-  /volumes/alerts/{uuid}:
+            type: array
+            items:
+              type: number
+  /v1/osd-volumes/usedsize/{uuid}/:
+    get:
+      summary: Retrieve volume used disk size
+      description: |
+        Retrieve volume used space size for specified UUID
+      parameters:
+        - name: uuid
+          in: path
+          description: Volume UUID
+          required: true
+          type: string
+          format: uuid
+      tags:
+        - Volumes
+      responses:
+        '200':
+          description: Volume used space
+          schema:
+            type: number
+  /v1/osd-volumes/alerts/:
+    get:
+      summary: Retrieve Volume Alerts
+      description: |
+        Retrieve Volume Alerts
+      tags:
+        - Volumes
+      responses:
+        '200':
+          description: Volume Alerts
+          schema:
+            $ref: '#/definitions/VolumeAlerts'
+  /v1/osd-volumes/alerts/{uuid}/:
     get:
       summary: Retrieve Volume Alerts
       description: |
@@ -180,19 +380,45 @@ paths:
           required: true
           type: string
           format: uuid
- 
       tags:
-        - Volume Alerts
+        - Volumes
       responses:
-        200:
+        '200':
           description: Volume Alerts
           schema:
-              $ref: '#/definitions/VolumeAlerts'
-        default:
-          description: Error Retrieving stats
+            $ref: '#/definitions/VolumeAlerts'
+  /v1/osd-volumes/requests/:
+    get:
+      summary: Retrieve Volume Requests
+      description: |
+        Retrieve Volume Requests
+      tags:
+        - Volumes
+      responses:
+        '200':
+          description: Volume Requests
           schema:
-            $ref: '#/definitions/Error'
-  /snapshots/:
+            $ref: '#/definitions/VolumeActiveRequests'
+  /v1/osd-volumes/requests/{uuid}/:
+    get:
+      summary: Retrieve Volume Requests
+      description: |
+        Retrieve Volume Requests for specified UUID
+      parameters:
+        - name: uuid
+          in: path
+          description: Volume UUID
+          required: true
+          type: string
+          format: uuid
+      tags:
+        - Volumes
+      responses:
+        '200':
+          description: Volume Requests
+          schema:
+            $ref: '#/definitions/VolumeActiveRequests'
+  /v1/osd-snapshots/:
     get:
       summary: List of snapshots
       description: |
@@ -220,18 +446,14 @@ paths:
           type: string
           format: uuid
       tags:
-        - Snap Enumerate
+        - Volumes
       responses:
-        200:
+        '200':
           description: An array of VolumeSnaps
           schema:
             type: array
             items:
               $ref: '#/definitions/VolumeSnap'
-        default:
-          description: Error
-          schema:
-            $ref: '#/definitions/Error'
     post:
       summary: Create New Snapshot
       description: Create new volume according to spec
@@ -243,140 +465,19 @@ paths:
           schema:
             $ref: '#/definitions/SnapCreateParams'
       tags:
-        - Snapshot Create
+        - Volumes
       responses:
-        200:
+        '200':
           description: UUID of neewly created snapshot
           schema:
             $ref: '#/definitions/UUID'
-        default:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-  
-  /snapshots/{uuid}:
-    get:
-      summary: Inspect Snapshot
-      description: |
-        Retrieves snapshot as specified by UUID
-      parameters:
-        - name: uuid
-          in: path
-          description: Snap UUID
-          required: true
-          type: string
-          format: uuid
-      tags:
-        - Snapshot Inspect
-      responses:
-        200:
-          description: Snapshot mapping to uuid
-          schema:
-              $ref: '#/definitions/VolumeSnap'
-        default:
-          description: Error retrieving snapshot
-          schema:
-            $ref: '#/definitions/Error'
-    delete:
-      summary: Delete Snapshot
-      description: |
-        Delete Snapshot
-      parameters:
-        - name: uuid
-          in: path
-          description: Volume UUID
-          required: true
-          type: string
-          format: uuid
-      tags:
-        - Snapshot Delete
-      responses:
-        200:
-          description: Snapshot Deleted
-          schema:
-              $ref: '#/definitions/UUID'
-        default:
-          description: Error deleting snapshot
-          schema:
-            $ref: '#/definitions/Error'
-  /nodes/:
-    post:
-      summary: Add a new node to the cluster
-      description: Node Delete
-      parameters:
-        - name: name
-          in: query
-          description: Hostname of the machine joining the cluster
-          required: true
-          type: string
-        - name: spec
-          in: body
-          description: Node Spec
-          required: true
-          schema:
-            $ref: '#/definitions/NodeSpec'
-      tags:
-        - Add Node
-      responses:
-        200:
-          description: Node addition acknowlegded
-          schema:
-            $ref: '#/definitions/UUID'
-        default:
-          description: Error adding node
-          schema:
-            $ref: '#/definitions/Error'
-  /nodes/{uuid}:
-    put:
-      summary: Update the status of a node in the cluster
-      description: Node Update
-      parameters:
-        - name: uuid
-          in: path
-          description: Node UUID
-          required: true
-          type: string
-          format: uuid
-        - name: spec
-          in: body
-          description: Node Spec
-          required: true
-          schema:
-            $ref: '#/definitions/NodeSpec'
-      tags:
-        - Update Node
-      responses:
-        200:
-          description: Node update acknowlegded
-          schema:
-            $ref: '#/definitions/UUID'
-        default:
-          description: Error updating node
-          schema:
-            $ref: '#/definitions/Error'
-    delete:
-      summary: Delete a node in the cluster
-      description: Node Delete
-      parameters:
-        - name: uuid
-          in: path
-          description: Node UUID
-          required: true
-          type: string
-          format: uuid
-      tags:
-        - Delete Node
-      responses:
-        200:
-          description: Node delete acknowlegded
-          schema:
-            $ref: '#/definitions/UUID'
-        default:
-          description: Error deleting node
-          schema:
-            $ref: '#/definitions/Error'
 definitions:
-  VolumeCreateParams:
+  VolumeResponse:
+    properties:
+      Error:
+        type: string
+        description: Error text
+  VolumeCreateRequest:
     properties:
       locator:
         $ref: '#/definitions/Locator'
@@ -384,6 +485,13 @@ definitions:
         $ref: '#/definitions/VolumeSpec'
       options:
         $ref: '#/definitions/CreateOptions'
+  VolumeCreateResponse:
+    properties:
+      Id:
+        type: string
+        format: uuuid
+      VolumeResponse:
+        $ref: '#/definitions/VolumeResponse'
   Volume:
     properties:
       uuid:
@@ -392,24 +500,32 @@ definitions:
         description: unique volume UUID
       locator:
         $ref: '#/definitions/Locator'
-        description: Volume locator
       ctime:
         type: string
         description: Creation time
       spec:
         $ref: '#/definitions/VolumeSpec'
-        description: User specified spec
       status:
         type: string
         description: Volume op status
-        enum: [ "NotPresent", "Up", "Down", "Degraded" ]
+        enum:
+          - NotPresent
+          - Up
+          - Down
+          - Degraded
       state:
         type: number
-        description: Volume state. 1 -> CreatePending, 2->Available, 4->Attached, 8->Detached, 16->ErrorState, 32->Deleted
+        description: >-
+          Volume state. 1 -> CreatePending, 2->Available, 4->Attached,
+          8->Detached, 16->ErrorState, 32->Deleted
       format:
         type: string
         description: Filesystem for this volume
-        enum: [ "xfs", "ext4", "zfs", "none" ]
+        enum:
+          - xfs
+          - ext4
+          - zfs
+          - none
       usage:
         type: number
         format: int64
@@ -430,13 +546,12 @@ definitions:
         description: Attach path for block devices
       mount_path:
         type: array
-        items: 
+        items:
           type: string
         description: Paths at which the volumes is mounted
       error:
         type: string
         description: Last error on this volume
-        
   VolumeSpec:
     properties:
       ephemeral:
@@ -445,14 +560,16 @@ definitions:
       size:
         type: number
         format: int64
-        description: Maximum size 
+        description: Maximum size
       blocksize:
         type: number
         format: int32
         description: Desired fs block size
       halevel:
         type: number
-        description: A number specifying the number of nodes that are allowed to fail and data be still available
+        description: >-
+          A number specifying the number of nodes that are allowed to fail and
+          data be still available
       cos:
         type: number
         minimum: 1
@@ -463,7 +580,9 @@ definitions:
         description: Enable or disable deduplication
       snapshot_interval:
         type: number
-        description: A number in minutes specifying how oftene snapshots should be taken. 0 disables snapshots
+        description: >-
+          A number in minutes specifying how oftene snapshots should be taken. 0
+          disables snapshots
       snapshot_depth:
         type: number
         description: Number of snapshots to keep
@@ -472,13 +591,12 @@ definitions:
         items:
           $ref: '#/definitions/NameValuePair'
         description: Arbitrary name value configuration pairs
-        
   CreateOptions:
     properties:
       fail_if_exists:
         type: boolean
         description: Fail if volume with matching locator exists
-      create_from_snap::
+      create_from_snap:
         type: string
         format: uuid
         description: create volume from specified snapshot
@@ -491,30 +609,28 @@ definitions:
         type: string
         description: comma seperated name value pairs
   VolumeStateParams:
-     properties:
-        mount:
-          type: integer
-          format: int32
-          description: 1 to mount, 2 to unmount
-        format:
-          type: integer
-          format: int32
-          description: 1 to format
-        attach:
-          type: integer
-          format: int32
-          description: 1 to attach, 2 to detach
-        mountpath:
-          type: string
-          description: Path to mount the device
-    
+    properties:
+      mount:
+        type: integer
+        format: int32
+        description: '1 to mount, 2 to unmount'
+      format:
+        type: integer
+        format: int32
+        description: 1 to format
+      attach:
+        type: integer
+        format: int32
+        description: '1 to attach, 2 to detach'
+      mountpath:
+        type: string
+        description: Path to mount the device
   UUID:
     properties:
       name:
         type: string
         description: Volume UUID
         format: uuid
-        
   NameValuePair:
     properties:
       name:
@@ -523,26 +639,20 @@ definitions:
       value:
         type: string
         description: Value
-    
   VolumeStats:
     properties:
       stats:
-          type: array
-          items:
-              $ref: '#/definitions/NameValuePair'
-          description: Stats name and value array
+        type: array
+        items:
+          $ref: '#/definitions/NameValuePair'
+        description: Stats name and value array
   VolumeAlerts:
     properties:
       stats:
-          type: array
-          items:
-              $ref: '#/definitions/NameValuePair'
-          description: Alerts name and description array
-  Error:
-    properties:
-      error:
-        type: string
-
+        type: array
+        items:
+          $ref: '#/definitions/NameValuePair'
+        description: Alerts name and description array
   VolumeSnap:
     properties:
       uuid:
@@ -565,7 +675,6 @@ definitions:
         items:
           $ref: '#/definitions/NameValuePair'
         description: Arbitrary name value pairs
-        
   SnapCreateParams:
     properties:
       uuid:
@@ -577,34 +686,187 @@ definitions:
         items:
           $ref: '#/definitions/NameValuePair'
         description: Arbitrary name value pairs
-        
-  NodeSpec:
+  ActiveRequest:
     properties:
-      ip:
-        type: string
-        description: IP address of the node
-      devices:
+      requestKV:
         type: array
         items:
-          $ref: '#/definitions/DevSpec'
-        description: Physical devices attached to this node
-      cpu:
-        type: number
-        format: int64
-        description: CPU percentage average since the last sample
-      memory:
-        type: number
-        format: int64
-        description: Memory available on this node in GB
-
-  DevSpec:
+          $ref: '#/definitions/NameValuePair'
+  VolumeActiveRequests:
     properties:
-      capacity:
+      RequestCount:
         type: number
         format: int64
-        description: Disk space available on this device, in GB
-      iops:
+        description: Number of active requests
+      ActiveRequest:
+        type: array
+        items:
+          $ref: '#/definitions/ActiveRequest'
+  StoragePool:
+    properties:
+      ID:
+        type: string
+        format: uuid
+      Cos:
+        type: number
+        format: int
+      Medium:
+        type: number
+        format: int
+      RaidLevel:
+        type: string
+      TotalSize:
+        type: number
+        format: uint64
+      Used:
+        type: number
+        format: uint64
+  Node:
+    properties:
+      Id:
+        type: string
+        format: uuid
+      Cpu:
+        type: number
+        format: float64
+      MemTotal:
+        type: number
+        format: uint64
+      MemUsed:
+        type: number
+        format: uint64
+      MemFree:
+        type: number
+        format: uint64
+      AvgLoad:
+        type: number
+        format: int
+      GenNumber:
+        type: number
+        format: uint64
+      Status:
+        type: string
+        enum:
+          - STATUS_NONE
+          - STATUS_INIT
+          - STATUS_OK
+          - STATUS_OFFLINE
+          - STATUS_ERROR
+          - STATUS_NOT_IN_QUORUM
+          - STATUS_DECOMMISSION
+          - STATUS_MAINTENANCE
+          - STATUS_STORAGE_DOWN
+          - STATUS_STORAGE_DEGRADED
+          - STATUS_NEEDS_REBOOT
+          - STATUS_STORAGE_REBALANCE
+          - STATUS_STORAGE_DRIVE_REPLACE
+          - STATUS_MAX
+      Disks:
+        type: array
+        items:
+          type: string
+      Pools:
+        type: array
+        items:
+          $ref: '#/definitions/StoragePool'
+      MgmtIp:
+        type: string
+        format: uuid
+      DataIp:
+        type: string
+        format: uuid
+      Timestamp:
+        type: string
+      StartTime:
+        type: string
+      Hostname:
+        type: string
+      NodeData:
+        type: array
+        items:
+          $ref: '#/definitions/NameValuePair'
+      NodeLabels:
+        type: array
+        items:
+          $ref: '#/definitions/NameValuePair'
+  Cluster:
+    properties:
+      Id:
+        type: string
+        format: uuid
+      Status:
+        type: string
+        enum:
+          - STATUS_NONE
+          - STATUS_INIT
+          - STATUS_OK
+          - STATUS_OFFLINE
+          - STATUS_ERROR
+          - STATUS_NOT_IN_QUORUM
+          - STATUS_DECOMMISSION
+          - STATUS_MAINTENANCE
+          - STATUS_STORAGE_DOWN
+          - STATUS_STORAGE_DEGRADED
+          - STATUS_NEEDS_REBOOT
+          - STATUS_STORAGE_REBALANCE
+          - STATUS_STORAGE_DRIVE_REPLACE
+          - STATUS_MAX
+      NodeId:
+        type: string
+        format: uuid
+      Nodes:
+        type: array
+        items:
+          $ref: '#/definitions/Node'
+  NodeValue:
+    properties:
+      Id:
+        type: string
+        format: uuid
+      GenNumber:
+        type: number
+        format: uint64
+      LastUpdateTs:
+        type: string
+      Status:
+        type: string
+      Value:
+        type: string
+  GossipSessionInfo:
+    properties:
+      Node:
+        type: string
+      Ts:
+        type: string
+      Dir:
+        type: number
+        format: uint8
+      Err:
+        type: string
+      Op:
+        type: string
+  ClusterState:
+    properties:
+      History:
+        type: array
+        items:
+          $ref: '#/definitions/GossipSessionInfo'
+      NodeStatus:
+        type: array
+        items:
+          $ref: '#/definitions/NodeValue'
+  StatPoint:
+    properties:
+      Name:
+        type: string
+      Tags:
+        type: array
+        items:
+          $ref: '#/definitions/NameValuePair'
+      Fields:
+        type: array
+        items:
+          type: string
+      Timestamp:
         type: number
         format: int64
-        description: Current average IOPS this device is capable of delivering
-
