@@ -125,47 +125,6 @@ paths:
           description: Accepted
       tags:
         - Clusters
-  /v1/cluster/enablegossip/:
-    put:
-      summary: Enables gossip
-      responses:
-        '202':
-          description: Accepted
-      tags:
-        - Clusters
-  /v1/cluster/disablegossip/:
-    put:
-      summary: Disables gossip
-      responses:
-        '202':
-          description: Accepted
-      tags:
-        - Clusters
-  /v1/cluster/shutdown/{uuid}/:
-    put:
-      summary: Shutdown node
-      description: |
-        Removes a node from the cluster
-      parameters:
-        - name: uuid
-          in: path
-          description: Node UUID
-          required: true
-          type: string
-          format: uuid
-      responses:
-        '202':
-          description: Accepted
-      tags:
-        - Clusters
-  /v1/cluster/shutdown/:
-    put:
-      summary: Shutdown cluster
-      responses:
-        '202':
-          description: Accepted
-      tags:
-        - Clusters
   /osd-volumes/versions/:
     get:
       summary: List of versions
