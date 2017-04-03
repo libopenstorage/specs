@@ -21,6 +21,11 @@ paths:
             type: array
             items:
               type: string
+          examples:
+                application/json: |-
+                     [
+                        {v1}
+                      ]
   /v1/cluster/enumerate/:
     get:
       summary: Retrieve cluster information
@@ -540,6 +545,11 @@ paths:
             type: array
             items:
               type: string
+          examples:
+            application/json: |-
+                     [
+                        {v1}
+                      ]
   /v1/osd-volumes/:
     get:
       summary: List of Volumes
@@ -774,17 +784,19 @@ paths:
                      "secure_device_path": "",
                      "background_processing": false
                     }]
-    post:
-      summary: Create New Volume
-      description: Create new volume according to spec
-      parameters:
-        - name: spec
-          in: body
+      post:
+        summary: Create New Volume
+        description: Create new volume according to spec
+        parameters:
+          - name: spec
+            in: body
             description: |
+             Volume create path example:
+             POST /v1/osd-volumes
               Volume spec example:
               ``` json
                   "locator": {
-                     "name": "volume1",
+                     "name": "myvolume",
                      "labels": "Initial"
                     }
                   "spec": {
@@ -803,16 +815,26 @@ paths:
                      }
                     }
               ```
-          required: true
-          schema:
-            $ref: '#/definitions/VolumeCreateRequest'
-      tags:
-        - Volumes
-      responses:
-        '200':
-          description: UUID of newly created volume
-          schema:
-            $ref: '#/definitions/VolumeCreateResponse'
+            required: true
+            schema:
+              $ref: '#/definitions/VolumeCreateRequest'
+        tags:
+          - Volumes
+        responses:
+          '200':
+            description: UUID of neewly created volume
+            schema:
+              $ref: '#/definitions/VolumeCreateResponse'
+            examples:
+             application/json: |-
+              {
+                 "cmd": "create",
+                 "status": "Ok",
+                 "desc": "Volume successfully created: 1018917718152465304",
+                 "uuid": [
+                  "1018917718152465304"
+                 ]
+                }
   /v1/osd-volumes/{uuid}/:
     get:
       summary: Inspect volume
@@ -901,48 +923,107 @@ paths:
                     "background_processing": true
                     }]
                   }
-    put:
-      summary: Change volume state
-      description: |
-        Attach, detach, format, mount and unmount operations
-      parameters:
-        - name: uuid
-          in: path
-          description: Volume UUID
-          required: true
-          type: string
-          format: uuid
-        - name: state
-          in: body
-          description: Desired Volume State
-          required: true
-          schema:
-            $ref: '#/definitions/VolumeStateParams'
-      tags:
-        - Volumes
-      responses:
-        '200':
-          description: Volume reflecting current state
-          schema:
-            $ref: '#/definitions/Volume'
-    delete:
-      summary: Delete Volume
-      description: |
-        Delete Volume
-      parameters:
-        - name: uuid
-          in: path
-          description: Volume UUID
-          required: true
-          type: string
-          format: uuid
-      tags:
-        - Volumes
-      responses:
-        '200':
-          description: Volume Deleted
-          schema:
-            $ref: '#/definitions/UUID'
+      put:
+        summary: Change volume state
+        description: |
+          Attach, detach, format, mount and unmount operations
+        parameters:
+          - name: uuid
+            in: path
+            description: |
+             Volume UUID as path parameter example:
+             PUT /v1/osd-volumes/myvolume
+            required: true
+            type: string
+            format: uuid
+          - name: state
+            in: body
+            description: |
+              Desired Volume State attach example:
+               ``` json
+                   {
+                     "action": {
+                        "attach: 2"
+                        }
+                   }
+              ```
+              Desired Volume State detach example:
+               ``` json
+                   {
+                     "action": {
+                        "attach: 1"
+                        }
+                   }
+              ```
+              Desired Volume State mount example:
+               ``` json
+                   {
+                     "action": {
+                        "mount: 2",
+                        "mount_path:tmp"
+                        }
+                   }
+              ```
+              Desired Volume State unmount example:
+               ``` json
+                   {
+                     "action": {
+                        "mount: 1",
+                        "mount_path:tmp"
+                        }
+                   }
+              ```
+            required: true
+            schema:
+              $ref: '#/definitions/VolumeStateParams'
+        tags:
+          - Volumes
+        responses:
+          '200':
+            description: |
+             Operation result of Attach/Detach/Mount/Unmount
+            schema:
+              $ref: '#/definitions/VolumeStateParams'
+            examples:
+             application/json: |-
+              {
+                 "cmd": "attach",
+                 "status": "Ok",
+                 "desc": "Volume successfully attached at: /dev/pxd/pxd186672328357254033",
+                 "uuid": [
+                  "h"
+                 ]
+              }
+      delete:
+        summary: Delete Volume
+        description: |
+          Delete Volume
+        parameters:
+          - name: uuid
+            in: path
+            description: |
+             Volume UUID as path parameter example:
+             DELETE /v1/osd-volumes/myvolume
+            required: true
+            type: string
+            format: uuid
+        tags:
+          - Volumes
+        responses:
+          '200':
+            description: Volume Deleted
+            schema:
+              $ref: '#/definitions/UUID'
+            examples:
+             application/json: |-
+              {
+               "cmd": "delete",
+               "status": "Ok",
+               "desc": "Volume myvolume successfully deleted.",
+               "uuid": [
+                "myvolume"
+               ]
+              }
   /v1/osd-volumes/stats/:
     get:
       summary: Retrieve Volume Stats
@@ -1189,17 +1270,26 @@ paths:
                "secure_device_path": "",
                "background_processing": false
               }]
-    post:
-      summary: Create New Snapshot
-      description: Create new volume according to spec
-      parameters:
-        - name: snapParams
-          in: body
-          description: Snapshot Params
-          required: true
-          schema:
-            $ref: '#/definitions/SnapCreateParams'
-      tags:
+      post:
+        summary: Create New Snapshot
+        description: Create new volume according to spec
+        parameters:
+          - name: snapParams
+            in: body
+            description: |
+              Snapshot Params example:
+               ``` json
+                   {
+                     "id":"test123",
+                     "locator":
+                              {"name":"sqlsnap"},
+                      "readonly":true
+                   }
+              ```
+            required: true
+            schema:
+              $ref: '#/definitions/SnapCreateParams'
+        tags:
         - Volumes
       responses:
         '200':
