@@ -21,11 +21,6 @@ paths:
             type: array
             items:
               type: string
-          examples:
-                application/json: |-
-                     [
-                        {v1}
-                      ]
   /v1/cluster/enumerate/:
     get:
       summary: Retrieve cluster information
@@ -43,7 +38,7 @@ paths:
                 {
                   "cluster": {
                               "Status": 2,
-                              "Id": "MY_CLUSTER_ID",
+                              "Id": "DB_CLUSTER_ID",
                               "NodeId": "e612618a-3c8f-490d-b288-674089de7254",
                               "Nodes": [
                                {
@@ -168,7 +163,7 @@ paths:
                        "status": "STATUS_OK",
                        "cluster": {
                         "Status": 2,
-                        "Id": "MY_CLUSTER_ID",
+                        "Id": "DB_CLUSTER_ID",
                         "NodeId": "e612618a-3c8f-490d-b288-674089de7254",
                         "Nodes": [
                          {
@@ -545,11 +540,6 @@ paths:
             type: array
             items:
               type: string
-          examples:
-            application/json: |-
-                     [
-                        {v1}
-                      ]
   /v1/osd-volumes/:
     get:
       summary: List of Volumes
@@ -592,7 +582,7 @@ paths:
                      "id": "186672328357254033",
                      "readonly": false,
                      "locator": {
-                      "name": "h"
+                      "name": "cassandra-vol"
                      },
                      "ctime": "2017-03-31T19:06:58Z",
                      "spec": {
@@ -657,7 +647,7 @@ paths:
                      "id": "371602944628495728",
                      "readonly": false,
                      "locator": {
-                      "name": "sample"
+                      "name": "mysql-vol"
                      },
                      "ctime": "2017-03-31T19:10:55Z",
                      "spec": {
@@ -796,8 +786,10 @@ paths:
               Volume spec example:
               ``` json
                   "locator": {
-                     "name": "myvolume",
-                     "labels": "Initial"
+                     "name": "cassandra-vol",
+                     "labels":{
+                        SLA: "Gold"
+                        }
                     }
                   "spec": {
                      "ephemeral": false,
@@ -822,18 +814,23 @@ paths:
           - Volumes
         responses:
           '200':
-            description: UUID of neewly created volume
+            description: |
+             UUID of newly created volume.
+             On failure's, a detailed error message will be available as below:
+             ``` json
+                {
+                   "volume_response": {
+                   "error": "Already exists"
+                  }
+                }
+            ```
             schema:
               $ref: '#/definitions/VolumeCreateResponse'
             examples:
              application/json: |-
               {
-                 "cmd": "create",
-                 "status": "Ok",
-                 "desc": "Volume successfully created: 1018917718152465304",
-                 "uuid": [
-                  "1018917718152465304"
-                 ]
+                 "id": "713030761715548077",
+                 "volume_response": {}
                 }
   /v1/osd-volumes/{uuid}/:
     get:
@@ -843,7 +840,7 @@ paths:
       parameters:
         - name: uuid
           in: path
-          description: Volume UUID
+          description: Volume UUID or Name
           required: true
           type: string
           format: uuid
@@ -860,7 +857,7 @@ paths:
                     "id": "960911126757490171",
                     "readonly": false,
                     "locator": {
-                     "name": "volume1"
+                     "name": "cassandra-vol"
                     },
                     "ctime": "2017-03-31T18:27:23Z",
                     "spec": {
@@ -931,8 +928,8 @@ paths:
           - name: uuid
             in: path
             description: |
-             Volume UUID as path parameter example:
-             PUT /v1/osd-volumes/myvolume
+             Volume UUID or name as path parameter example:
+             PUT /v1/osd-volumes/cassandra-vol
             required: true
             type: string
             format: uuid
@@ -960,7 +957,7 @@ paths:
                    {
                      "action": {
                         "mount: 2",
-                        "mount_path:tmp"
+                        "mount_path:"/tmp""
                         }
                    }
               ```
@@ -969,7 +966,7 @@ paths:
                    {
                      "action": {
                         "mount: 1",
-                        "mount_path:tmp"
+                        "mount_path:"/tmp""
                         }
                    }
               ```
@@ -986,14 +983,66 @@ paths:
               $ref: '#/definitions/VolumeStateParams'
             examples:
              application/json: |-
-              {
-                 "cmd": "attach",
-                 "status": "Ok",
-                 "desc": "Volume successfully attached at: /dev/pxd/pxd186672328357254033",
-                 "uuid": [
-                  "h"
-                 ]
-              }
+                {
+                  "volume": {
+                    "id": "567662444761523200",
+                    "locator": {
+                      "name": "cassandra-vol"
+                    },
+                    "ctime": {
+                      "seconds": 1491195375,
+                      "nanos": 503891611
+                    },
+                    "spec": {
+                      "size": 1073741824,
+                      "format": 2,
+                      "block_size": 32768,
+                      "ha_level": 1,
+                      "cos": 1,
+                      "replica_set": {},
+                      "aggregation_level": 1,
+                      "scale": 1
+                    },
+                    "usage": 33964032,
+                    "last_scan": {
+                      "seconds": 1491195375,
+                      "nanos": 503891948
+                    },
+                    "format": 2,
+                    "status": 2,
+                    "state": 3,
+                    "attached_on": "e612618a-3c8f-490d-b288-674089de7254",
+                    "device_path": "/dev/pxd/pxd567662444761523200",
+                    "attach_path": [
+                      "/tmp"
+                    ],
+                    "replica_sets": [
+                      {
+                        "nodes": [
+                          "e612618a-3c8f-490d-b288-674089de7254"
+                        ]
+                      }
+                    ],
+                    "runtime_state": [
+                      {
+                        "runtime_state": {
+                          "FullResyncBlocks": "[{1 0} {-1 0} {-1 0} {-1 0} {-1 0}]",
+                          "ID": "0",
+                          "ReadQuorum": "1",
+                          "ReadSet": "[1]",
+                          "ReplicaSetCurr": "[1]",
+                          "ReplicaSetNext": "[1]",
+                          "ResyncBlocks": "[{1 0} {-1 0} {-1 0} {-1 0} {-1 0}]",
+                          "RuntimeState": "clean",
+                          "TimestampBlocksPerNode": "[0 0 0 0 0]",
+                          "TimestampBlocksTotal": "0",
+                          "WriteQuorum": "1",
+                          "WriteSet": "[1]"
+                        }
+                      }
+                    ]
+                  }
+                }
       delete:
         summary: Delete Volume
         description: |
@@ -1014,16 +1063,6 @@ paths:
             description: Volume Deleted
             schema:
               $ref: '#/definitions/UUID'
-            examples:
-             application/json: |-
-              {
-               "cmd": "delete",
-               "status": "Ok",
-               "desc": "Volume myvolume successfully deleted.",
-               "uuid": [
-                "myvolume"
-               ]
-              }
   /v1/osd-volumes/stats/:
     get:
       summary: Retrieve Volume Stats
@@ -1280,9 +1319,9 @@ paths:
               Snapshot Params example:
                ``` json
                    {
-                     "id":"test123",
+                     "id":"cassandra-vol",
                      "locator":
-                              {"name":"sqlsnap"},
+                              {"name":"dbsnap"},
                       "readonly":true
                    }
               ```
@@ -1290,22 +1329,20 @@ paths:
             schema:
               $ref: '#/definitions/SnapCreateParams'
         tags:
-        - Volumes
-      responses:
-        '200':
-          description: UUID of newly created snapshot
-          schema:
-            $ref: '#/definitions/UUID'
+          - Volumes
+        responses:
+          '200':
+            description: UUID of newly created snapshot
+            schema:
+              $ref: '#/definitions/UUID'
             examples:
              application/json: |-
-              {
-                 "cmd": "snap volume",
-                 "status": "Ok",
-                 "desc": "Volume successfully snapped: 645861281512222692",
-                 "uuid": [
-                  "645861281512222692"
-                 ]
-              }
+                {
+                  "volume_create_response": {
+                    "id": "376740775858546908",
+                    "volume_response": {}
+                  }
+                }
 definitions:
   VolumeResponse:
     properties:
