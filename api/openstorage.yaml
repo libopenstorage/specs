@@ -788,7 +788,7 @@ paths:
                   "locator": {
                      "name": "cassandra-vol",
                      "labels":{
-                        SLA: "Gold"
+                        "SLA": "Gold"
                         }
                     }
                   "spec": {
@@ -816,7 +816,7 @@ paths:
           '200':
             description: |
              UUID of newly created volume.
-             On failure's, a detailed error message will be available as below
+             On failures, a detailed error message will be available as below
             schema:
               $ref: '#/definitions/VolumeCreateResponse'
             examples:
