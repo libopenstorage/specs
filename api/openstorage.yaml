@@ -33,7 +33,7 @@ paths:
           description: The cluster details
           schema:
             $ref: '#/definitions/Cluster'
-            examples:
+          examples:
               application/json: |-
                 {
                   "cluster": {
@@ -157,7 +157,7 @@ paths:
           description: Cluster status
           schema:
             $ref: '#/definitions/ClusterState'
-            examples:
+          examples:
               application/json: |-
                 {
                        "status": "STATUS_OK",
@@ -417,92 +417,92 @@ paths:
             type: array
             items:
               $ref: '#/definitions/StatPoint'
-            examples:
+          examples:
              application/json: |-
-                {
-                       "Id": "e612618a-3c8f-490d-b288-674089de7254",
-                       "Cpu": 10.163111668757843,
-                       "MemTotal": 33585233920,
-                       "MemUsed": 10582343680,
-                       "MemFree": 23002890240,
-                       "Avgload": 0,
-                       "Status": 2,
-                       "GenNumber": 1490838795607068510,
-                       "Disks": null,
-                       "Pools": null,
-                       "MgmtIp": "192.168.1.123",
-                       "DataIp": "192.168.1.123",
-                       "Timestamp": "2017-03-31T22:35:00.268574343Z",
-                       "StartTime": "2017-03-30T01:53:15.607377185Z",
-                       "Hostname": "PXDEMO",
-                       "NodeData": {
-                        "STORAGE-INFO": {
-                         "LastError": "",
-                         "Random4KIops": 0,
-                         "ReadThroughput": 0,
-                         "ResourceMdUUID": "",
-                         "ResourceUUID": "",
-                         "Resources": {
-                          "0:1": {
-                           "id": "1",
-                           "last_scan": {
-                            "nanos": 1.68896028e+08,
-                            "seconds": 1.490838812e+09
-                           },
-                           "online": true,
-                           "path": "/dev/loop0",
-                           "rotation_speed": "Unknown",
-                           "seq_write": 1.905e+09,
-                           "size": 2.147483648e+09,
-                           "used": 2.3986176e+08
-                          }
-                         },
-                         "ResourcesCount": 1,
-                         "ResourcesLastScan": "Resources Scan OK",
-                         "ResourcesMd": null,
-                         "ResourcesMdCount": 0,
-                         "ResourcesMdLastScan": "",
-                         "Status": "Up",
-                         "TotalSize": 2.147483648e+09,
-                         "Used": 0,
-                         "WriteThroughput": 0
+              {
+                "Id": "e612618a-3c8f-490d-b288-674089de7254",
+                "Cpu": 10.163111668757843,
+                "MemTotal": 33585233920,
+                "MemUsed": 10582343680,
+                "MemFree": 23002890240,
+                "Avgload": 0,
+                "Status": 2,
+                "GenNumber": 1490838795607068400,
+                "Disks": null,
+                "Pools": null,
+                "MgmtIp": "192.168.1.123",
+                "DataIp": "192.168.1.123",
+                "Timestamp": "2017-03-31T22:35:00.268574343Z",
+                "StartTime": "2017-03-30T01:53:15.607377185Z",
+                "Hostname": "PXDEMO",
+                "NodeData": {
+                  "STORAGE-INFO": {
+                    "LastError": "",
+                    "Random4KIops": 0,
+                    "ReadThroughput": 0,
+                    "ResourceMdUUID": "",
+                    "ResourceUUID": "",
+                    "Resources": {
+                      "0:1": {
+                        "id": "1",
+                        "last_scan": {
+                          "nanos": 168896028,
+                          "seconds": 1490838812
                         },
-                        "STORAGE-RUNTIME": {
-                         "MID": "e612618a-3c8f-490d-b288-674089de7254",
-                         "PoolUsage": {
-                          "0": {
-                           "TotalAllocated": 6.33507677e+08
-                          }
-                         },
-                         "Usage": {
-                          "TotalAllocated": 6.33507677e+08
-                         }
-                        },
-                        "storage_stats": {
-                         "Cpu": 9.598494353826851,
-                         "DiskAvail": 1.513975971e+09,
-                         "DiskTotal": 2.147483648e+09,
-                         "DiskUtil": 6.33507677e+08,
-                         "Memory": 31,
-                         "PendingIo": 0
-                        }
-                       },
-                       "NodeLabels": {
-                        "City": "Redwood City",
-                        "Country": "United States",
-                        "Data IP": "192.168.1.123",
-                        "ISP": "Level 3 Communications",
-                        "ISP IP": "4.15.123.2",
-                        "LAT": "3.74914E+01",
-                        "LNG": "-1.22211E+02",
-                        "Managemet IP": "192.168.1.123",
-                        "Node Count Limit": "3",
-                        "PX Version": "2.0.0-e586614",
-                        "Region": "CA",
-                        "Timezone": "America/Los_Angeles",
-                        "Zip": "94063"
-                       }
+                        "online": true,
+                        "path": "/dev/loop0",
+                        "rotation_speed": "Unknown",
+                        "seq_write": 1905000000,
+                        "size": 2147483648,
+                        "used": 239861760
+                      }
+                    },
+                    "ResourcesCount": 1,
+                    "ResourcesLastScan": "Resources Scan OK",
+                    "ResourcesMd": null,
+                    "ResourcesMdCount": 0,
+                    "ResourcesMdLastScan": "",
+                    "Status": "Up",
+                    "TotalSize": 2147483648,
+                    "Used": 0,
+                    "WriteThroughput": 0
+                  },
+                  "STORAGE-RUNTIME": {
+                    "MID": "e612618a-3c8f-490d-b288-674089de7254",
+                    "PoolUsage": {
+                      "0": {
+                        "TotalAllocated": 633507677
+                      }
+                    },
+                    "Usage": {
+                      "TotalAllocated": 633507677
+                    }
+                  },
+                  "storage_stats": {
+                    "Cpu": 9.598494353826851,
+                    "DiskAvail": 1513975971,
+                    "DiskTotal": 2147483648,
+                    "DiskUtil": 633507677,
+                    "Memory": 31,
+                    "PendingIo": 0
                   }
+                },
+                "NodeLabels": {
+                  "City": "Redwood City",
+                  "Country": "United States",
+                  "Data IP": "192.168.1.123",
+                  "ISP": "Level 3 Communications",
+                  "ISP IP": "4.15.123.2",
+                  "LAT": "3.74914E+01",
+                  "LNG": "-1.22211E+02",
+                  "Managemet IP": "192.168.1.123",
+                  "Node Count Limit": "3",
+                  "PX Version": "2.0.0-e586614",
+                  "Region": "CA",
+                  "Timezone": "America/Los_Angeles",
+                  "Zip": "94063"
+                }
+              }
   /v1/cluster/{uuid}/:
     delete:
       summary: Delete node
@@ -576,16 +576,17 @@ paths:
             type: array
             items:
               $ref: '#/definitions/Volume'
-            examples:
+          examples:
               application/json: |-
-                   [{
-                     "id": "186672328357254033",
-                     "readonly": false,
-                     "locator": {
+                [
+                  {
+                    "id": "186672328357254033",
+                    "readonly": false,
+                    "locator": {
                       "name": "cassandra-vol"
-                     },
-                     "ctime": "2017-03-31T19:06:58Z",
-                     "spec": {
+                    },
+                    "ctime": "2017-03-31T19:06:58Z",
+                    "spec": {
                       "ephemeral": false,
                       "size": "1073741824",
                       "format": "ext4",
@@ -596,9 +597,7 @@ paths:
                       "dedupe": false,
                       "snapshot_interval": 0,
                       "shared": false,
-                      "replica_set": {
-
-                      },
+                      "replica_set": {},
                       "aggregation_level": 1,
                       "encrypted": false,
                       "passphrase": "",
@@ -607,50 +606,51 @@ paths:
                       "sticky": false,
                       "max_backups": 0,
                       "backup_schedule": ""
-                     },
-                     "usage": "33964032",
-                     "last_scan": "2017-03-31T19:06:58Z",
-                     "format": "ext4",
-                     "status": "up",
-                     "state": "attached",
-                     "attached_on": "e612618a-3c8f-490d-b288-674089de7254",
-                     "device_path": "e612618a-3c8f-490d-b288-674089de7254",
-                     "replica_sets": [
+                    },
+                    "usage": "33964032",
+                    "last_scan": "2017-03-31T19:06:58Z",
+                    "format": "ext4",
+                    "status": "up",
+                    "state": "attached",
+                    "attached_on": "e612618a-3c8f-490d-b288-674089de7254",
+                    "device_path": "e612618a-3c8f-490d-b288-674089de7254",
+                    "replica_sets": [
                       {
-                       "nodes": [
-                        "e612618a-3c8f-490d-b288-674089de7254"
-                       ]
+                        "nodes": [
+                          "e612618a-3c8f-490d-b288-674089de7254"
+                        ]
                       }
-                     ],
-                     "error": "",
-                     "runtime_state": [
+                    ],
+                    "error": "",
+                    "runtime_state": [
                       {
-                       "runtime_state": {
-                        "FullResyncBlocks": "[{1 0} {-1 0} {-1 0} {-1 0} {-1 0}]",
-                        "ID": "0",
-                        "ReadQuorum": "1",
-                        "ReadSet": "[1]",
-                        "ReplicaSetCurr": "[1]",
-                        "ReplicaSetNext": "[1]",
-                        "ResyncBlocks": "[{1 0} {-1 0} {-1 0} {-1 0} {-1 0}]",
-                        "RuntimeState": "clean",
-                        "TimestampBlocksPerNode": "[0 0 0 0 0]",
-                        "TimestampBlocksTotal": "0",
-                        "WriteQuorum": "1",
-                        "WriteSet": "[1]"
-                       }
+                        "runtime_state": {
+                          "FullResyncBlocks": "[{1 0} {-1 0} {-1 0} {-1 0} {-1 0}]",
+                          "ID": "0",
+                          "ReadQuorum": "1",
+                          "ReadSet": "[1]",
+                          "ReplicaSetCurr": "[1]",
+                          "ReplicaSetNext": "[1]",
+                          "ResyncBlocks": "[{1 0} {-1 0} {-1 0} {-1 0} {-1 0}]",
+                          "RuntimeState": "clean",
+                          "TimestampBlocksPerNode": "[0 0 0 0 0]",
+                          "TimestampBlocksTotal": "0",
+                          "WriteQuorum": "1",
+                          "WriteSet": "[1]"
+                        }
                       }
-                     ],
-                     "secure_device_path": "",
-                     "background_processing": true
-                    },{
-                     "id": "371602944628495728",
-                     "readonly": false,
-                     "locator": {
+                    ],
+                    "secure_device_path": "",
+                    "background_processing": true
+                  },
+                  {
+                    "id": "371602944628495728",
+                    "readonly": false,
+                    "locator": {
                       "name": "mysql-vol"
-                     },
-                     "ctime": "2017-03-31T19:10:55Z",
-                     "spec": {
+                    },
+                    "ctime": "2017-03-31T19:10:55Z",
+                    "spec": {
                       "ephemeral": false,
                       "size": "2147483648",
                       "format": "ext4",
@@ -661,9 +661,7 @@ paths:
                       "dedupe": false,
                       "snapshot_interval": 0,
                       "shared": false,
-                      "replica_set": {
-
-                      },
+                      "replica_set": {},
                       "aggregation_level": 1,
                       "encrypted": false,
                       "passphrase": "",
@@ -672,50 +670,51 @@ paths:
                       "sticky": false,
                       "max_backups": 0,
                       "backup_schedule": ""
-                     },
-                     "usage": "67788800",
-                     "last_scan": "2017-03-31T19:10:55Z",
-                     "format": "ext4",
-                     "status": "up",
-                     "state": "attached",
-                     "attached_on": "e612618a-3c8f-490d-b288-674089de7254",
-                     "device_path": "e612618a-3c8f-490d-b288-674089de7254",
-                     "replica_sets": [
+                    },
+                    "usage": "67788800",
+                    "last_scan": "2017-03-31T19:10:55Z",
+                    "format": "ext4",
+                    "status": "up",
+                    "state": "attached",
+                    "attached_on": "e612618a-3c8f-490d-b288-674089de7254",
+                    "device_path": "e612618a-3c8f-490d-b288-674089de7254",
+                    "replica_sets": [
                       {
-                       "nodes": [
-                        "e612618a-3c8f-490d-b288-674089de7254"
-                       ]
+                        "nodes": [
+                          "e612618a-3c8f-490d-b288-674089de7254"
+                        ]
                       }
-                     ],
-                     "error": "",
-                     "runtime_state": [
+                    ],
+                    "error": "",
+                    "runtime_state": [
                       {
-                       "runtime_state": {
-                        "FullResyncBlocks": "[{1 0} {-1 0} {-1 0} {-1 0} {-1 0}]",
-                        "ID": "0",
-                        "ReadQuorum": "1",
-                        "ReadSet": "[1]",
-                        "ReplicaSetCurr": "[1]",
-                        "ReplicaSetNext": "[1]",
-                        "ResyncBlocks": "[{1 0} {-1 0} {-1 0} {-1 0} {-1 0}]",
-                        "RuntimeState": "clean",
-                        "TimestampBlocksPerNode": "[0 0 0 0 0]",
-                        "TimestampBlocksTotal": "0",
-                        "WriteQuorum": "1",
-                        "WriteSet": "[1]"
-                       }
+                        "runtime_state": {
+                          "FullResyncBlocks": "[{1 0} {-1 0} {-1 0} {-1 0} {-1 0}]",
+                          "ID": "0",
+                          "ReadQuorum": "1",
+                          "ReadSet": "[1]",
+                          "ReplicaSetCurr": "[1]",
+                          "ReplicaSetNext": "[1]",
+                          "ResyncBlocks": "[{1 0} {-1 0} {-1 0} {-1 0} {-1 0}]",
+                          "RuntimeState": "clean",
+                          "TimestampBlocksPerNode": "[0 0 0 0 0]",
+                          "TimestampBlocksTotal": "0",
+                          "WriteQuorum": "1",
+                          "WriteSet": "[1]"
+                        }
                       }
-                     ],
-                     "secure_device_path": "",
-                     "background_processing": true
-                    },{
-                     "id": "556970537543779086",
-                     "readonly": false,
-                     "locator": {
+                    ],
+                    "secure_device_path": "",
+                    "background_processing": true
+                  },
+                  {
+                    "id": "556970537543779086",
+                    "readonly": false,
+                    "locator": {
                       "name": "mysql_volume"
-                     },
-                     "ctime": "2017-03-30T02:02:35Z",
-                     "spec": {
+                    },
+                    "ctime": "2017-03-30T02:02:35Z",
+                    "spec": {
                       "ephemeral": false,
                       "size": "1073741824",
                       "format": "ext4",
@@ -734,47 +733,48 @@ paths:
                       "sticky": false,
                       "max_backups": 0,
                       "backup_schedule": ""
-                     },
-                     "usage": "254148608",
-                     "last_scan": "2017-03-30T02:02:35Z",
-                     "format": "ext4",
-                     "status": "up",
-                     "state": "attached",
-                     "attached_on": "e612618a-3c8f-490d-b288-674089de7254",
-                     "device_path": "/dev/pxd/pxd556970537543779086",
-                     "attach_path": [
+                    },
+                    "usage": "254148608",
+                    "last_scan": "2017-03-30T02:02:35Z",
+                    "format": "ext4",
+                    "status": "up",
+                    "state": "attached",
+                    "attached_on": "e612618a-3c8f-490d-b288-674089de7254",
+                    "device_path": "/dev/pxd/pxd556970537543779086",
+                    "attach_path": [
                       "/var/lib/osd/mounts/mysql_volume"
-                     ],
-                     "replica_sets": [
+                    ],
+                    "replica_sets": [
                       {
-                       "nodes": [
-                        "e612618a-3c8f-490d-b288-674089de7254"
-                       ]
+                        "nodes": [
+                          "e612618a-3c8f-490d-b288-674089de7254"
+                        ]
                       }
-                     ],
-                     "error": "",
-                     "runtime_state": [
+                    ],
+                    "error": "",
+                    "runtime_state": [
                       {
-                       "runtime_state": {
-                        "FullResyncBlocks": "[{1 0} {-1 0} {-1 0} {-1 0} {-1 0}]",
-                        "ID": "0",
-                        "ReadQuorum": "1",
-                        "ReadSet": "[1]",
-                        "ReplicaSetCurr": "[1]",
-                        "ReplicaSetNext": "[1]",
-                        "ResyncBlocks": "[{1 0} {-1 0} {-1 0} {-1 0} {-1 0}]",
-                        "RuntimeState": "clean",
-                        "TimestampBlocksPerNode": "[0 0 0 0 0]",
-                        "TimestampBlocksTotal": "0",
-                        "WriteQuorum": "1",
-                        "WriteSet": "[1]"
-                       }
+                        "runtime_state": {
+                          "FullResyncBlocks": "[{1 0} {-1 0} {-1 0} {-1 0} {-1 0}]",
+                          "ID": "0",
+                          "ReadQuorum": "1",
+                          "ReadSet": "[1]",
+                          "ReplicaSetCurr": "[1]",
+                          "ReplicaSetNext": "[1]",
+                          "ResyncBlocks": "[{1 0} {-1 0} {-1 0} {-1 0} {-1 0}]",
+                          "RuntimeState": "clean",
+                          "TimestampBlocksPerNode": "[0 0 0 0 0]",
+                          "TimestampBlocksTotal": "0",
+                          "WriteQuorum": "1",
+                          "WriteSet": "[1]"
+                        }
                       }
-                     ],
-                     "secure_device_path": "",
-                     "background_processing": false
-                    }]
-      post:
+                    ],
+                    "secure_device_path": "",
+                    "background_processing": false
+                  }
+                ]
+    post:
         summary: Create New Volume
         description: Create new volume according to spec
         parameters:
@@ -816,14 +816,7 @@ paths:
           '200':
             description: |
              UUID of newly created volume.
-             On failure's, a detailed error message will be available as below:
-             ``` json
-                {
-                   "volume_response": {
-                   "error": "Already exists"
-                  }
-                }
-            ```
+             On failure's, a detailed error message will be available as below
             schema:
               $ref: '#/definitions/VolumeCreateResponse'
             examples:
@@ -851,7 +844,7 @@ paths:
           description: Volume
           schema:
             $ref: '#/definitions/Volume'
-            examples:
+          examples:
              application/json: |-
               [{
                     "id": "960911126757490171",
@@ -920,7 +913,7 @@ paths:
                     "background_processing": true
                     }]
                   }
-      put:
+    put:
         summary: Change volume state
         description: |
           Attach, detach, format, mount and unmount operations
@@ -1043,7 +1036,7 @@ paths:
                     ]
                   }
                 }
-      delete:
+    delete:
         summary: Delete Volume
         description: |
           Delete Volume
@@ -1139,7 +1132,7 @@ paths:
           description: Volume Alerts
           schema:
             $ref: '#/definitions/VolumeAlerts'
-            examples:
+          examples:
              application/json: |-
                 [{
                    "id": "10",
@@ -1258,58 +1251,60 @@ paths:
             type: array
             items:
               $ref: '#/definitions/VolumeSnap'
-            examples:
+          examples:
              application/json: |-
-              [{
-               "id": "6160761704448908",
-               "source": {
-                "parent": "556970537543779086",
-                "seed": ""
-               },
-               "readonly": false,
-               "locator": {
-                "name": "556970537543779086.snap2017-03-31T23:30:45.368202632Z"
-               },
-               "ctime": "2017-03-31T23:30:45Z",
-               "spec": {
-                "ephemeral": false,
-                "size": "1073741824",
-                "format": "ext4",
-                "block_size": "65536",
-                "ha_level": "1",
-                "cos": "low",
-                "io_profile": "sequential",
-                "dedupe": false,
-                "snapshot_interval": 0,
-                "shared": false,
-                "aggregation_level": 1,
-                "encrypted": false,
-                "passphrase": "",
-                "snapshot_schedule": "",
-                "scale": 0,
-                "sticky": false,
-                "max_backups": 0,
-                "backup_schedule": ""
-               },
-               "usage": "254148608",
-               "last_scan": "2017-03-31T23:30:45Z",
-               "format": "ext4",
-               "status": "up",
-               "state": "detached",
-               "attached_on": "",
-               "device_path": "",
-               "replica_sets": [
-                {
-                 "nodes": [
-                  "e612618a-3c8f-490d-b288-674089de7254"
-                 ]
-                }
-               ],
-               "error": "",
-               "secure_device_path": "",
-               "background_processing": false
-              }]
-      post:
+                [
+                  {
+                    "id": "6160761704448908",
+                    "source": {
+                      "parent": "556970537543779086",
+                      "seed": ""
+                    },
+                    "readonly": false,
+                    "locator": {
+                      "name": "556970537543779086.snap2017-03-31T23:30:45.368202632Z"
+                    },
+                    "ctime": "2017-03-31T23:30:45Z",
+                    "spec": {
+                      "ephemeral": false,
+                      "size": "1073741824",
+                      "format": "ext4",
+                      "block_size": "65536",
+                      "ha_level": "1",
+                      "cos": "low",
+                      "io_profile": "sequential",
+                      "dedupe": false,
+                      "snapshot_interval": 0,
+                      "shared": false,
+                      "aggregation_level": 1,
+                      "encrypted": false,
+                      "passphrase": "",
+                      "snapshot_schedule": "",
+                      "scale": 0,
+                      "sticky": false,
+                      "max_backups": 0,
+                      "backup_schedule": ""
+                    },
+                    "usage": "254148608",
+                    "last_scan": "2017-03-31T23:30:45Z",
+                    "format": "ext4",
+                    "status": "up",
+                    "state": "detached",
+                    "attached_on": "",
+                    "device_path": "",
+                    "replica_sets": [
+                      {
+                        "nodes": [
+                          "e612618a-3c8f-490d-b288-674089de7254"
+                        ]
+                      }
+                    ],
+                    "error": "",
+                    "secure_device_path": "",
+                    "background_processing": false
+                  }
+                ]
+    post:
         summary: Create New Snapshot
         description: Create new volume according to spec
         parameters:
