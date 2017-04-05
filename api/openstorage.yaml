@@ -36,98 +36,96 @@ paths:
           examples:
               application/json: |-
                 {
-                  "cluster": {
-                              "Status": 2,
-                              "Id": "DB_CLUSTER_ID",
-                              "NodeId": "e612618a-3c8f-490d-b288-674089de7254",
-                              "Nodes": [
-                               {
-                                "Id": "e612618a-3c8f-490d-b288-674089de7254",
-                                "Cpu": 9.628697293895533,
-                                "MemTotal": 33585233920,
-                                "MemUsed": 10144595968,
-                                "MemFree": 23440637952,
-                                "Avgload": 0,
-                                "Status": 2,
-                                "GenNumber": 1490838795607068510,
-                                "Disks": null,
-                                "Pools": null,
-                                "MgmtIp": "192.168.1.123",
-                                "DataIp": "192.168.1.123",
-                                "Timestamp": "2017-03-31T20:12:19.653009696Z",
-                                "StartTime": "2017-03-30T01:53:15.607377185Z",
-                                "Hostname": "PXDEMO",
-                                "NodeData": {
-                                 "STORAGE-INFO": {
-                                  "LastError": "",
-                                  "Random4KIops": 0,
-                                  "ReadThroughput": 0,
-                                  "ResourceMdUUID": "",
-                                  "ResourceUUID": "",
-                                  "Resources": {
-                                   "0:1": {
-                                    "id": "1",
-                                    "last_scan": {
-                                     "nanos": 1.68896028e+08,
-                                     "seconds": 1.490838812e+09
-                                    },
-                                    "online": true,
-                                    "path": "/dev/loop0",
-                                    "rotation_speed": "Unknown",
-                                    "seq_write": 1.905e+09,
-                                    "size": 2.147483648e+09,
-                                    "used": 2.3986176e+08
-                                   }
-                                  },
-                                  "ResourcesCount": 1,
-                                  "ResourcesLastScan": "Resources Scan OK",
-                                  "ResourcesMd": null,
-                                  "ResourcesMdCount": 0,
-                                  "ResourcesMdLastScan": "",
-                                  "Status": "Up",
-                                  "TotalSize": 2.147483648e+09,
-                                  "Used": 0,
-                                  "WriteThroughput": 0
-                                 },
-                                 "STORAGE-RUNTIME": {
-                                  "MID": "e612618a-3c8f-490d-b288-674089de7254",
-                                  "PoolUsage": {
-                                   "0": {
-                                    "TotalAllocated": 6.33507677e+08
-                                   }
-                                  },
-                                  "Usage": {
-                                   "TotalAllocated": 6.33507677e+08
-                                  }
-                                 },
-                                 "storage_stats": {
-                                  "Cpu": 9.628697293895533,
-                                  "DiskAvail": 1.513975971e+09,
-                                  "DiskTotal": 2.147483648e+09,
-                                  "DiskUtil": 6.33507677e+08,
-                                  "Memory": 30,
-                                  "PendingIo": 0
-                                 }
-                                },
-                                "NodeLabels": {
-                                 "City": "Redwood City",
-                                 "Country": "United States",
-                                 "Data IP": "192.168.1.123",
-                                 "ISP": "Level 3 Communications",
-                                 "ISP IP": "4.15.123.2",
-                                 "LAT": "3.74914E+01",
-                                 "LNG": "-1.22211E+02",
-                                 "Managemet IP": "192.168.1.123",
-                                 "Node Count Limit": "3",
-                                 "PX Version": "2.0.0-e586614",
-                                 "Region": "CA",
-                                 "Timezone": "America/Los_Angeles",
-                                 "Zip": "94063"
-                                }
-                               }
-                              ]
-                             }
+                  "Status": 2,
+                  "Id": "DB_CLUSTER",
+                  "NodeId": "76964eac-c21d-44a0-a78a-ca5f99a2e43e",
+                  "Nodes": [
+                    {
+                      "Id": "76964eac-c21d-44a0-a78a-ca5f99a2e43e",
+                      "Cpu": 17.480719794344473,
+                      "MemTotal": 4143230976,
+                      "MemUsed": 1727221760,
+                      "MemFree": 2416009216,
+                      "Avgload": 0,
+                      "Status": 2,
+                      "GenNumber": 1491349542598326500,
+                      "Disks": null,
+                      "Pools": null,
+                      "MgmtIp": "192.168.1.130",
+                      "DataIp": "192.168.1.130",
+                      "Timestamp": "2017-04-05T01:50:33.235099493Z",
+                      "StartTime": "2017-04-04T23:45:42.598875077Z",
+                      "Hostname": "elise",
+                      "NodeData": {
+                        "STORAGE-INFO": {
+                          "Resources": {
+                            "0:1": {
+                              "id": "1",
+                              "path": "/dev/sdb",
+                              "online": true,
+                              "seq_write": 58547000,
+                              "size": 2147483648,
+                              "used": 239861760,
+                              "rotation_speed": "Unknown",
+                              "last_scan": {
+                                "seconds": 1491349561,
+                                "nanos": 7911589
+                              }
+                            }
+                          },
+                          "ResourcesLastScan": "Resources Scan OK",
+                          "ResourcesCount": 1,
+                          "ResourceUUID": "",
+                          "ResourcesMd": null,
+                          "ResourcesMdLastScan": "",
+                          "ResourcesMdCount": 0,
+                          "ResourceMdUUID": "",
+                          "ReadThroughput": 0,
+                          "WriteThroughput": 0,
+                          "Random4KIops": 0,
+                          "Status": "Up",
+                          "TotalSize": 2147483648,
+                          "Used": 0,
+                          "LastError": ""
+                        },
+                        "STORAGE-RUNTIME": {
+                          "MID": "76964eac-c21d-44a0-a78a-ca5f99a2e43e",
+                          "Usage": {
+                            "TotalAllocated": 622770258
+                          },
+                          "PoolUsage": {
+                            "0": {
+                              "TotalAllocated": 622770258
+                            }
+                          }
+                        },
+                        "storage_stats": {
+                          "PendingIo": 0,
+                          "Cpu": 10.103626943005182,
+                          "Memory": 41,
+                          "DiskTotal": 2147483648,
+                          "DiskAvail": 1524713390,
+                          "DiskUtil": 622770258
+                        }
+                      },
+                      "NodeLabels": {
+                        "City": "Redwood City",
+                        "Country": "United States",
+                        "Data IP": "192.168.1.130",
+                        "ISP": "Level 3 Communications",
+                        "ISP IP": "4.15.123.2",
+                        "LAT": "3.74914E+01",
+                        "LNG": "-1.22211E+02",
+                        "Managemet IP": "192.168.1.130",
+                        "Node Count Limit": "3",
+                        "PX Version": "2.0.0-3c1932e",
+                        "Region": "CA",
+                        "Timezone": "America/Los_Angeles",
+                        "Zip": "94063"
                       }
+                    }
+                  ]
+                }
   /v1/cluster/gossipstate/:
     get:
       summary: Retrieve cluster gossipstate
@@ -140,6 +138,102 @@ paths:
           description: Cluster state
           schema:
             $ref: '#/definitions/ClusterState'
+          examples:
+             application/json: |-
+              {
+                "NodeStatus": [
+                  {
+                    "GenNumber": 1491349542598326500,
+                    "Id": "76964eac-c21d-44a0-a78a-ca5f99a2e43e",
+                    "LastUpdateTs": "2017-04-05T06:06:44.550792356Z",
+                    "Status": 1,
+                    "Value": {
+                      "Avgload": 0,
+                      "Cpu": 7.329842931937173,
+                      "DataIp": "192.168.1.130",
+                      "Disks": null,
+                      "GenNumber": 1491349542598326500,
+                      "Hostname": "osboxes",
+                      "Id": "76964eac-c21d-44a0-a78a-ca5f99a2e43e",
+                      "MemFree": 1428639744,
+                      "MemTotal": 4143230976,
+                      "MemUsed": 2714591232,
+                      "MgmtIp": "192.168.1.130",
+                      "NodeData": {
+                        "STORAGE-INFO": {
+                          "LastError": "",
+                          "Random4KIops": 0,
+                          "ReadThroughput": 0,
+                          "ResourceMdUUID": "",
+                          "ResourceUUID": "",
+                          "Resources": {
+                            "0:1": {
+                              "id": "1",
+                              "last_scan": {
+                                "nanos": 7911589,
+                                "seconds": 1491349561
+                              },
+                              "online": true,
+                              "path": "/dev/sdb",
+                              "rotation_speed": "Unknown",
+                              "seq_write": 58547000,
+                              "size": 2147483648,
+                              "used": 239861760
+                            }
+                          },
+                          "ResourcesCount": 1,
+                          "ResourcesLastScan": "Resources Scan OK",
+                          "ResourcesMd": null,
+                          "ResourcesMdCount": 0,
+                          "ResourcesMdLastScan": "",
+                          "Status": "Up",
+                          "TotalSize": 2147483648,
+                          "Used": 0,
+                          "WriteThroughput": 0
+                        },
+                        "STORAGE-RUNTIME": {
+                          "MID": "76964eac-c21d-44a0-a78a-ca5f99a2e43e",
+                          "PoolUsage": {
+                            "0": {
+                              "TotalAllocated": 622770258
+                            }
+                          },
+                          "Usage": {
+                            "TotalAllocated": 622770258
+                          }
+                        },
+                        "storage_stats": {
+                          "Cpu": 4.935064935064935,
+                          "DiskAvail": 1524713390,
+                          "DiskTotal": 2147483648,
+                          "DiskUtil": 622770258,
+                          "Memory": 65,
+                          "PendingIo": 0
+                        }
+                      },
+                      "NodeLabels": {
+                        "City": "Redwood City",
+                        "Country": "United States",
+                        "Data IP": "192.168.1.130",
+                        "ISP": "Level 3 Communications",
+                        "ISP IP": "4.15.123.2",
+                        "LAT": "3.74914E+01",
+                        "LNG": "-1.22211E+02",
+                        "Managemet IP": "192.168.1.130",
+                        "Node Count Limit": "3",
+                        "PX Version": "2.0.0-3c1932e",
+                        "Region": "CA",
+                        "Timezone": "America/Los_Angeles",
+                        "Zip": "94063"
+                      },
+                      "Pools": null,
+                      "StartTime": "2017-04-04T23:45:42.598875077Z",
+                      "Status": 2,
+                      "Timestamp": "2017-04-05T06:06:44.548717651Z"
+                    }
+                  }
+                ]
+              }
   /v1/cluster/status/:
     get:
       summary: Retrieve cluster status
@@ -160,132 +254,42 @@ paths:
           examples:
               application/json: |-
                 {
-                       "status": "STATUS_OK",
-                       "cluster": {
-                        "Status": 2,
-                        "Id": "DB_CLUSTER_ID",
-                        "NodeId": "e612618a-3c8f-490d-b288-674089de7254",
-                        "Nodes": [
-                         {
-                          "Id": "e612618a-3c8f-490d-b288-674089de7254",
-                          "Cpu": 12.775330396475772,
-                          "MemTotal": 33585233920,
-                          "MemUsed": 10530840576,
-                          "MemFree": 23054393344,
-                          "Avgload": 0,
-                          "Status": 2,
-                          "GenNumber": 1490838795607068510,
-                          "Disks": null,
-                          "Pools": null,
-                          "MgmtIp": "192.168.1.123",
-                          "DataIp": "192.168.1.123",
-                          "Timestamp": "2017-03-31T22:03:01.099095921Z",
-                          "StartTime": "2017-03-30T01:53:15.607377185Z",
-                          "Hostname": "PXDEMO",
-                          "NodeData": {
-                           "STORAGE-INFO": {
-                            "LastError": "",
-                            "Random4KIops": 0,
-                            "ReadThroughput": 0,
-                            "ResourceMdUUID": "",
-                            "ResourceUUID": "",
-                            "Resources": {
-                             "0:1": {
-                              "id": "1",
-                              "last_scan": {
-                               "nanos": 1.68896028e+08,
-                               "seconds": 1.490838812e+09
-                              },
-                              "online": true,
-                              "path": "/dev/loop0",
-                              "rotation_speed": "Unknown",
-                              "seq_write": 1.905e+09,
-                              "size": 2.147483648e+09,
-                              "used": 2.3986176e+08
-                             }
-                            },
-                            "ResourcesCount": 1,
-                            "ResourcesLastScan": "Resources Scan OK",
-                            "ResourcesMd": null,
-                            "ResourcesMdCount": 0,
-                            "ResourcesMdLastScan": "",
-                            "Status": "Up",
-                            "TotalSize": 2.147483648e+09,
-                            "Used": 0,
-                            "WriteThroughput": 0
-                           },
-                           "STORAGE-RUNTIME": {
-                            "MID": "e612618a-3c8f-490d-b288-674089de7254",
-                            "PoolUsage": {
-                             "0": {
-                              "TotalAllocated": 6.33507677e+08
-                             }
-                            },
-                            "Usage": {
-                             "TotalAllocated": 6.33507677e+08
-                            }
-                           },
-                           "storage_stats": {
-                            "Cpu": 11.492816989381636,
-                            "DiskAvail": 1.513975971e+09,
-                            "DiskTotal": 2.147483648e+09,
-                            "DiskUtil": 6.33507677e+08,
-                            "Memory": 31,
-                            "PendingIo": 0
-                           }
-                          },
-                          "NodeLabels": {
-                           "City": "Redwood City",
-                           "Country": "United States",
-                           "Data IP": "192.168.1.123",
-                           "ISP": "Level 3 Communications",
-                           "ISP IP": "4.15.123.2",
-                           "LAT": "3.74914E+01",
-                           "LNG": "-1.22211E+02",
-                           "Managemet IP": "192.168.1.123",
-                           "Node Count Limit": "3",
-                           "PX Version": "2.0.0-e586614",
-                           "Region": "CA",
-                           "Timezone": "America/Los_Angeles",
-                           "Zip": "94063"
-                          }
-                         }
-                        ]
-                       },
-                       "daemoninfo": {
-                        "Version": "2.0.0-e586614",
-                        "IsEnterprise": false,
-                        "SchedulerInfo": {
-                         "DockerVersion": "1.12.3",
-                         "LastError": "",
-                         "Containers": null
-                        },
-                        "StorageSpec": {
-                         "DriverName": "kernel",
-                         "SwVersion": "2.0.0-e586614",
-                         "BlockDriver": 0,
-                         "Version": "1",
-                         "NID": 1,
-                         "MID": "e612618a-3c8f-490d-b288-674089de7254",
-                         "PeerAddr": "tcp://192.168.1.123:9003",
-                         "ClientAddr": "http://192.168.1.123:9001",
-                         "StorageVol": "/var/.px",
-                         "StorageVolMd": "/var/.px/0",
-                         "Info": {
+                  "Status": 2,
+                  "Id": "DB_CLUSTER",
+                  "NodeId": "76964eac-c21d-44a0-a78a-ca5f99a2e43e",
+                  "Nodes": [
+                    {
+                      "Id": "76964eac-c21d-44a0-a78a-ca5f99a2e43e",
+                      "Cpu": 17.480719794344473,
+                      "MemTotal": 4143230976,
+                      "MemUsed": 1727221760,
+                      "MemFree": 2416009216,
+                      "Avgload": 0,
+                      "Status": 2,
+                      "GenNumber": 1491349542598326500,
+                      "Disks": null,
+                      "Pools": null,
+                      "MgmtIp": "192.168.1.130",
+                      "DataIp": "192.168.1.130",
+                      "Timestamp": "2017-04-05T01:50:33.235099493Z",
+                      "StartTime": "2017-04-04T23:45:42.598875077Z",
+                      "Hostname": "osboxes",
+                      "NodeData": {
+                        "STORAGE-INFO": {
                           "Resources": {
-                           "0:1": {
-                            "id": "1",
-                            "path": "/dev/loop0",
-                            "online": true,
-                            "seq_write": 1.905e+09,
-                            "size": 2147483648,
-                            "used": 239861760,
-                            "rotation_speed": "Unknown",
-                            "last_scan": {
-                             "seconds": 1490838812,
-                             "nanos": 168896028
+                            "0:1": {
+                              "id": "1",
+                              "path": "/dev/sdb",
+                              "online": true,
+                              "seq_write": 58547000,
+                              "size": 2147483648,
+                              "used": 239861760,
+                              "rotation_speed": "Unknown",
+                              "last_scan": {
+                                "seconds": 1491349561,
+                                "nanos": 7911589
+                              }
                             }
-                           }
                           },
                           "ResourcesLastScan": "Resources Scan OK",
                           "ResourcesCount": 1,
@@ -301,84 +305,45 @@ paths:
                           "TotalSize": 2147483648,
                           "Used": 0,
                           "LastError": ""
-                         },
-                         "MdInfo": {
-                          "Resources": {},
-                          "ResourcesLastScan": "",
-                          "ResourcesCount": 0,
-                          "ResourceUUID": "",
-                          "ResourcesMd": null,
-                          "ResourcesMdLastScan": "",
-                          "ResourcesMdCount": 0,
-                          "ResourceMdUUID": "",
-                          "ReadThroughput": 0,
-                          "WriteThroughput": 0,
-                          "Random4KIops": 0,
-                          "Status": "",
-                          "TotalSize": 0,
-                          "Used": 0,
-                          "LastError": ""
-                         },
-                         "Geo": {
-                          "Provider": "local",
-                          "Region": "default",
-                          "Zone": "default",
-                          "Rack": "default"
-                         },
-                         "DebugLevel": "",
-                         "Labels": {},
-                         "OpStatus": "Up",
-                         "ErrStatus": 0,
-                         "HAOpStatus": 0,
-                         "Decommissioned": false,
-                         "DataPools": [
-                          {
-                           "Cos": 3,
-                           "RaidLevel": "raid0",
-                           "Info": {
-                            "Resources": {
-                             "1": {
-                              "id": "1",
-                              "path": "/dev/loop0",
-                              "online": true,
-                              "seq_write": 1.905e+09,
-                              "size": 2147483648,
-                              "used": 239861760,
-                              "rotation_speed": "Unknown",
-                              "last_scan": {
-                               "seconds": 1490838812,
-                               "nanos": 168896028
-                              }
-                             }
-                            },
-                            "ResourcesLastScan": "Resources Scan OK",
-                            "ResourcesCount": 1,
-                            "ResourceUUID": "c1e09ac6-0c51-4200-9f3d-8c2989dfaf18",
-                            "ResourcesMd": null,
-                            "ResourcesMdLastScan": "",
-                            "ResourcesMdCount": 0,
-                            "ResourceMdUUID": "",
-                            "ReadThroughput": 0,
-                            "WriteThroughput": 1.905e+09,
-                            "Random4KIops": 0,
-                            "Status": "Up",
-                            "TotalSize": 2147483648,
-                            "Used": 0,
-                            "LastError": ""
-                           },
-                           "Status": "Up",
-                           "ReserveFactor": 0,
-                           "SnapReserveFactor": 0
+                        },
+                        "STORAGE-RUNTIME": {
+                          "MID": "76964eac-c21d-44a0-a78a-ca5f99a2e43e",
+                          "Usage": {
+                            "TotalAllocated": 622770258
+                          },
+                          "PoolUsage": {
+                            "0": {
+                              "TotalAllocated": 622770258
+                            }
                           }
-                         ],
-                         "MdPoolID": 0,
-                         "RaidLevel": "",
-                         "ScanSchedule": "",
-                         "AsyncIO": false,
-                         "NumThreads": 0
+                        },
+                        "storage_stats": {
+                          "PendingIo": 0,
+                          "Cpu": 10.103626943005182,
+                          "Memory": 41,
+                          "DiskTotal": 2147483648,
+                          "DiskAvail": 1524713390,
+                          "DiskUtil": 622770258
                         }
-                       }
+                      },
+                      "NodeLabels": {
+                        "City": "Redwood City",
+                        "Country": "United States",
+                        "Data IP": "192.168.1.130",
+                        "ISP": "Level 3 Communications",
+                        "ISP IP": "4.15.123.2",
+                        "LAT": "3.74914E+01",
+                        "LNG": "-1.22211E+02",
+                        "Managemet IP": "192.168.1.130",
+                        "Node Count Limit": "3",
+                        "PX Version": "2.0.0-3c1932e",
+                        "Region": "CA",
+                        "Timezone": "America/Los_Angeles",
+                        "Zip": "94063"
                       }
+                    }
+                  ]
+                }
   /v1/cluster/peerstatus/:
     get:
       summary: Retrieve peer node information
@@ -420,21 +385,17 @@ paths:
           examples:
              application/json: |-
               {
-                "Id": "e612618a-3c8f-490d-b288-674089de7254",
-                "Cpu": 10.163111668757843,
-                "MemTotal": 33585233920,
-                "MemUsed": 10582343680,
-                "MemFree": 23002890240,
                 "Avgload": 0,
-                "Status": 2,
-                "GenNumber": 1490838795607068400,
+                "Cpu": 9.23076923076923,
+                "DataIp": "192.168.1.130",
                 "Disks": null,
-                "Pools": null,
-                "MgmtIp": "192.168.1.123",
-                "DataIp": "192.168.1.123",
-                "Timestamp": "2017-03-31T22:35:00.268574343Z",
-                "StartTime": "2017-03-30T01:53:15.607377185Z",
-                "Hostname": "PXDEMO",
+                "GenNumber": 1491349542598326500,
+                "Hostname": "osboxes",
+                "Id": "76964eac-c21d-44a0-a78a-ca5f99a2e43e",
+                "MemFree": 848941056,
+                "MemTotal": 4143230976,
+                "MemUsed": 3294289920,
+                "MgmtIp": "192.168.1.130",
                 "NodeData": {
                   "STORAGE-INFO": {
                     "LastError": "",
@@ -446,13 +407,13 @@ paths:
                       "0:1": {
                         "id": "1",
                         "last_scan": {
-                          "nanos": 168896028,
-                          "seconds": 1490838812
+                          "nanos": 7911589,
+                          "seconds": 1491349561
                         },
                         "online": true,
-                        "path": "/dev/loop0",
+                        "path": "/dev/sdb",
                         "rotation_speed": "Unknown",
-                        "seq_write": 1905000000,
+                        "seq_write": 58547000,
                         "size": 2147483648,
                         "used": 239861760
                       }
@@ -468,40 +429,44 @@ paths:
                     "WriteThroughput": 0
                   },
                   "STORAGE-RUNTIME": {
-                    "MID": "e612618a-3c8f-490d-b288-674089de7254",
+                    "MID": "76964eac-c21d-44a0-a78a-ca5f99a2e43e",
                     "PoolUsage": {
                       "0": {
-                        "TotalAllocated": 633507677
+                        "TotalAllocated": 622770258
                       }
                     },
                     "Usage": {
-                      "TotalAllocated": 633507677
+                      "TotalAllocated": 622770258
                     }
                   },
                   "storage_stats": {
-                    "Cpu": 9.598494353826851,
-                    "DiskAvail": 1513975971,
+                    "Cpu": 23.93617021276596,
+                    "DiskAvail": 1524713390,
                     "DiskTotal": 2147483648,
-                    "DiskUtil": 633507677,
-                    "Memory": 31,
+                    "DiskUtil": 622770258,
+                    "Memory": 79,
                     "PendingIo": 0
                   }
                 },
                 "NodeLabels": {
                   "City": "Redwood City",
                   "Country": "United States",
-                  "Data IP": "192.168.1.123",
+                  "Data IP": "192.168.1.130",
                   "ISP": "Level 3 Communications",
                   "ISP IP": "4.15.123.2",
                   "LAT": "3.74914E+01",
                   "LNG": "-1.22211E+02",
-                  "Managemet IP": "192.168.1.123",
+                  "Managemet IP": "192.168.1.130",
                   "Node Count Limit": "3",
-                  "PX Version": "2.0.0-e586614",
+                  "PX Version": "2.0.0-3c1932e",
                   "Region": "CA",
                   "Timezone": "America/Los_Angeles",
                   "Zip": "94063"
-                }
+                },
+                "Pools": null,
+                "StartTime": "2017-04-04T23:45:42.598875077Z",
+                "Status": 2,
+                "Timestamp": "2017-04-05T17:50:35.662759754Z"
               }
   /v1/cluster/{uuid}/:
     delete:
