@@ -21,6 +21,11 @@ paths:
             type: array
             items:
               type: string
+          examples:
+            application/json: |-
+              [
+               "v1"
+               ]
   /v1/cluster/enumerate/:
     get:
       summary: Retrieve cluster information
@@ -1033,6 +1038,18 @@ paths:
           description: Volume Stats
           schema:
             $ref: '#/definitions/VolumeStats'
+          examples:
+            application/json: |-
+                {
+                  "bytes_used": 355749888,
+                  "io_ms": 6716,
+                  "read_bytes": 335872,
+                  "read_ms": 8,
+                  "reads": 20,
+                  "write_bytes": 402989056,
+                  "write_ms": 10400,
+                  "writes": 2484
+                }
   /v1/osd-volumes/stats/{uuid}/:
     get:
       summary: Retrieve Volume Stats
