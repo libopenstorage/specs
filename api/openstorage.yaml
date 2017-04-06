@@ -113,132 +113,9 @@ paths:
                           "DiskUtil": 622770258
                         }
                       },
-                      "NodeLabels": {
-                        "City": "Redwood City",
-                        "Country": "United States",
-                        "Data IP": "192.168.1.130",
-                        "ISP": "Level 3 Communications",
-                        "ISP IP": "4.15.123.2",
-                        "LAT": "3.74914E+01",
-                        "LNG": "-1.22211E+02",
-                        "Managemet IP": "192.168.1.130",
-                        "Node Count Limit": "3",
-                        "PX Version": "2.0.0-3c1932e",
-                        "Region": "CA",
-                        "Timezone": "America/Los_Angeles",
-                        "Zip": "94063"
-                      }
                     }
                   ]
                 }
-  /v1/cluster/gossipstate/:
-    get:
-      summary: Retrieve cluster gossipstate
-      description: |
-        Returns information on the clusters gossip state
-      tags:
-        - Clusters
-      responses:
-        '200':
-          description: Cluster state
-          schema:
-            $ref: '#/definitions/ClusterState'
-          examples:
-             application/json: |-
-              {
-                "NodeStatus": [
-                  {
-                    "GenNumber": 1491349542598326500,
-                    "Id": "76964eac-c21d-44a0-a78a-ca5f99a2e43e",
-                    "LastUpdateTs": "2017-04-05T06:06:44.550792356Z",
-                    "Status": 1,
-                    "Value": {
-                      "Avgload": 0,
-                      "Cpu": 7.329842931937173,
-                      "DataIp": "192.168.1.130",
-                      "Disks": null,
-                      "GenNumber": 1491349542598326500,
-                      "Hostname": "osboxes",
-                      "Id": "76964eac-c21d-44a0-a78a-ca5f99a2e43e",
-                      "MemFree": 1428639744,
-                      "MemTotal": 4143230976,
-                      "MemUsed": 2714591232,
-                      "MgmtIp": "192.168.1.130",
-                      "NodeData": {
-                        "STORAGE-INFO": {
-                          "LastError": "",
-                          "Random4KIops": 0,
-                          "ReadThroughput": 0,
-                          "ResourceMdUUID": "",
-                          "ResourceUUID": "",
-                          "Resources": {
-                            "0:1": {
-                              "id": "1",
-                              "last_scan": {
-                                "nanos": 7911589,
-                                "seconds": 1491349561
-                              },
-                              "online": true,
-                              "path": "/dev/sdb",
-                              "rotation_speed": "Unknown",
-                              "seq_write": 58547000,
-                              "size": 2147483648,
-                              "used": 239861760
-                            }
-                          },
-                          "ResourcesCount": 1,
-                          "ResourcesLastScan": "Resources Scan OK",
-                          "ResourcesMd": null,
-                          "ResourcesMdCount": 0,
-                          "ResourcesMdLastScan": "",
-                          "Status": "Up",
-                          "TotalSize": 2147483648,
-                          "Used": 0,
-                          "WriteThroughput": 0
-                        },
-                        "STORAGE-RUNTIME": {
-                          "MID": "76964eac-c21d-44a0-a78a-ca5f99a2e43e",
-                          "PoolUsage": {
-                            "0": {
-                              "TotalAllocated": 622770258
-                            }
-                          },
-                          "Usage": {
-                            "TotalAllocated": 622770258
-                          }
-                        },
-                        "storage_stats": {
-                          "Cpu": 4.935064935064935,
-                          "DiskAvail": 1524713390,
-                          "DiskTotal": 2147483648,
-                          "DiskUtil": 622770258,
-                          "Memory": 65,
-                          "PendingIo": 0
-                        }
-                      },
-                      "NodeLabels": {
-                        "City": "Redwood City",
-                        "Country": "United States",
-                        "Data IP": "192.168.1.130",
-                        "ISP": "Level 3 Communications",
-                        "ISP IP": "4.15.123.2",
-                        "LAT": "3.74914E+01",
-                        "LNG": "-1.22211E+02",
-                        "Managemet IP": "192.168.1.130",
-                        "Node Count Limit": "3",
-                        "PX Version": "2.0.0-3c1932e",
-                        "Region": "CA",
-                        "Timezone": "America/Los_Angeles",
-                        "Zip": "94063"
-                      },
-                      "Pools": null,
-                      "StartTime": "2017-04-04T23:45:42.598875077Z",
-                      "Status": 2,
-                      "Timestamp": "2017-04-05T06:06:44.548717651Z"
-                    }
-                  }
-                ]
-              }
   /v1/cluster/status/:
     get:
       summary: Retrieve cluster status
@@ -331,41 +208,9 @@ paths:
                           "DiskUtil": 622770258
                         }
                       },
-                      "NodeLabels": {
-                        "City": "Redwood City",
-                        "Country": "United States",
-                        "Data IP": "192.168.1.130",
-                        "ISP": "Level 3 Communications",
-                        "ISP IP": "4.15.123.2",
-                        "LAT": "3.74914E+01",
-                        "LNG": "-1.22211E+02",
-                        "Managemet IP": "192.168.1.130",
-                        "Node Count Limit": "3",
-                        "PX Version": "2.0.0-3c1932e",
-                        "Region": "CA",
-                        "Timezone": "America/Los_Angeles",
-                        "Zip": "94063"
-                      }
                     }
                   ]
                 }
-  /v1/cluster/peerstatus/:
-    get:
-      summary: Retrieve peer node information
-      description: |
-        Returns information on the peer node status
-      parameters:
-        - name: name
-          in: query
-          required: true
-          type: string
-      tags:
-        - Clusters
-      responses:
-        '200':
-          description: Peer node status
-          schema:
-            $ref: '#/definitions/ClusterState'
   /v1/cluster/inspect/{uuid}/:
     get:
       summary: Retrieve cluster node stats
@@ -452,21 +297,6 @@ paths:
                     "Memory": 79,
                     "PendingIo": 0
                   }
-                },
-                "NodeLabels": {
-                  "City": "Redwood City",
-                  "Country": "United States",
-                  "Data IP": "192.168.1.130",
-                  "ISP": "Level 3 Communications",
-                  "ISP IP": "4.15.123.2",
-                  "LAT": "3.74914E+01",
-                  "LNG": "-1.22211E+02",
-                  "Managemet IP": "192.168.1.130",
-                  "Node Count Limit": "3",
-                  "PX Version": "2.0.0-3c1932e",
-                  "Region": "CA",
-                  "Timezone": "America/Los_Angeles",
-                  "Zip": "94063"
                 },
                 "Pools": null,
                 "StartTime": "2017-04-04T23:45:42.598875077Z",
@@ -755,27 +585,27 @@ paths:
              POST /v1/osd-volumes
               Volume spec example:
               ``` json
-                  "locator": {
-                     "name": "cassandra-vol",
-                     "labels":{
+                  {
+                    "locator": {
+                      "name": "cassandra-vol",
+                      "volume_labels": {
                         "SLA": "Gold"
-                        }
+                      }
+                    },
+                    "spec": {
+                      "ephemeral": false,
+                      "size": 2147483648,
+                      "format": 2,
+                      "block_size": 32768,
+                      "ha_level": 1,
+                      "cos": 1,
+                      "io_priority": "medium",
+                      "dedupe": false,
+                      "snapshot_interval": 0,
+                      "shared": false,
+                      "replica_set": {}
                     }
-                  "spec": {
-                     "ephemeral": false,
-                     "size": "10737418240",
-                     "format": "ext4",
-                     "block_size": "32768",
-                     "ha_level": "1",
-                     "cos": "low",
-                     "io_profile": "sequential",
-                     "dedupe": false,
-                     "snapshot_interval": 0,
-                     "shared": false,
-                     "replica_set": {
-
-                     }
-                    }
+                  }
               ```
             required: true
             schema:
