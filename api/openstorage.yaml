@@ -21,6 +21,11 @@ paths:
             type: array
             items:
               type: string
+          examples:
+            application/json: |-
+              [
+               "v1"
+               ]
   /v1/cluster/enumerate/:
     get:
       summary: Retrieve cluster information
@@ -33,18 +38,84 @@ paths:
           description: The cluster details
           schema:
             $ref: '#/definitions/Cluster'
-  /v1/cluster/gossipstate/:
-    get:
-      summary: Retrieve cluster gossipstate
-      description: |
-        Returns information on the clusters gossip state
-      tags:
-        - Clusters
-      responses:
-        '200':
-          description: Cluster state
-          schema:
-            $ref: '#/definitions/ClusterState'
+          examples:
+              application/json: |-
+                {
+                  "Status": 2,
+                  "Id": "DB_CLUSTER",
+                  "NodeId": "76964eac-c21d-44a0-a78a-ca5f99a2e43e",
+                  "Nodes": [
+                    {
+                      "Id": "76964eac-c21d-44a0-a78a-ca5f99a2e43e",
+                      "Cpu": 17.480719794344473,
+                      "MemTotal": 4143230976,
+                      "MemUsed": 1727221760,
+                      "MemFree": 2416009216,
+                      "Avgload": 0,
+                      "Status": 2,
+                      "GenNumber": 1491349542598326500,
+                      "Disks": null,
+                      "Pools": null,
+                      "MgmtIp": "192.168.1.130",
+                      "DataIp": "192.168.1.130",
+                      "Timestamp": "2017-04-05T01:50:33.235099493Z",
+                      "StartTime": "2017-04-04T23:45:42.598875077Z",
+                      "Hostname": "elise",
+                      "NodeData": {
+                        "STORAGE-INFO": {
+                          "Resources": {
+                            "0:1": {
+                              "id": "1",
+                              "path": "/dev/sdb",
+                              "online": true,
+                              "seq_write": 58547000,
+                              "size": 2147483648,
+                              "used": 239861760,
+                              "rotation_speed": "Unknown",
+                              "last_scan": {
+                                "seconds": 1491349561,
+                                "nanos": 7911589
+                              }
+                            }
+                          },
+                          "ResourcesLastScan": "Resources Scan OK",
+                          "ResourcesCount": 1,
+                          "ResourceUUID": "",
+                          "ResourcesMd": null,
+                          "ResourcesMdLastScan": "",
+                          "ResourcesMdCount": 0,
+                          "ResourceMdUUID": "",
+                          "ReadThroughput": 0,
+                          "WriteThroughput": 0,
+                          "Random4KIops": 0,
+                          "Status": "Up",
+                          "TotalSize": 2147483648,
+                          "Used": 0,
+                          "LastError": ""
+                        },
+                        "STORAGE-RUNTIME": {
+                          "MID": "76964eac-c21d-44a0-a78a-ca5f99a2e43e",
+                          "Usage": {
+                            "TotalAllocated": 622770258
+                          },
+                          "PoolUsage": {
+                            "0": {
+                              "TotalAllocated": 622770258
+                            }
+                          }
+                        },
+                        "storage_stats": {
+                          "PendingIo": 0,
+                          "Cpu": 10.103626943005182,
+                          "Memory": 41,
+                          "DiskTotal": 2147483648,
+                          "DiskAvail": 1524713390,
+                          "DiskUtil": 622770258
+                        }
+                      },
+                    }
+                  ]
+                }
   /v1/cluster/status/:
     get:
       summary: Retrieve cluster status
@@ -62,23 +133,84 @@ paths:
           description: Cluster status
           schema:
             $ref: '#/definitions/ClusterState'
-  /v1/cluster/peerstatus/:
-    get:
-      summary: Retrieve peer node information
-      description: |
-        Returns information on the peer node status
-      parameters:
-        - name: name
-          in: query
-          required: true
-          type: string
-      tags:
-        - Clusters
-      responses:
-        '200':
-          description: Peer node status
-          schema:
-            $ref: '#/definitions/ClusterState'
+          examples:
+              application/json: |-
+                {
+                  "Status": 2,
+                  "Id": "DB_CLUSTER",
+                  "NodeId": "76964eac-c21d-44a0-a78a-ca5f99a2e43e",
+                  "Nodes": [
+                    {
+                      "Id": "76964eac-c21d-44a0-a78a-ca5f99a2e43e",
+                      "Cpu": 17.480719794344473,
+                      "MemTotal": 4143230976,
+                      "MemUsed": 1727221760,
+                      "MemFree": 2416009216,
+                      "Avgload": 0,
+                      "Status": 2,
+                      "GenNumber": 1491349542598326500,
+                      "Disks": null,
+                      "Pools": null,
+                      "MgmtIp": "192.168.1.130",
+                      "DataIp": "192.168.1.130",
+                      "Timestamp": "2017-04-05T01:50:33.235099493Z",
+                      "StartTime": "2017-04-04T23:45:42.598875077Z",
+                      "Hostname": "osboxes",
+                      "NodeData": {
+                        "STORAGE-INFO": {
+                          "Resources": {
+                            "0:1": {
+                              "id": "1",
+                              "path": "/dev/sdb",
+                              "online": true,
+                              "seq_write": 58547000,
+                              "size": 2147483648,
+                              "used": 239861760,
+                              "rotation_speed": "Unknown",
+                              "last_scan": {
+                                "seconds": 1491349561,
+                                "nanos": 7911589
+                              }
+                            }
+                          },
+                          "ResourcesLastScan": "Resources Scan OK",
+                          "ResourcesCount": 1,
+                          "ResourceUUID": "",
+                          "ResourcesMd": null,
+                          "ResourcesMdLastScan": "",
+                          "ResourcesMdCount": 0,
+                          "ResourceMdUUID": "",
+                          "ReadThroughput": 0,
+                          "WriteThroughput": 0,
+                          "Random4KIops": 0,
+                          "Status": "Up",
+                          "TotalSize": 2147483648,
+                          "Used": 0,
+                          "LastError": ""
+                        },
+                        "STORAGE-RUNTIME": {
+                          "MID": "76964eac-c21d-44a0-a78a-ca5f99a2e43e",
+                          "Usage": {
+                            "TotalAllocated": 622770258
+                          },
+                          "PoolUsage": {
+                            "0": {
+                              "TotalAllocated": 622770258
+                            }
+                          }
+                        },
+                        "storage_stats": {
+                          "PendingIo": 0,
+                          "Cpu": 10.103626943005182,
+                          "Memory": 41,
+                          "DiskTotal": 2147483648,
+                          "DiskAvail": 1524713390,
+                          "DiskUtil": 622770258
+                        }
+                      },
+                    }
+                  ]
+                }
   /v1/cluster/inspect/{uuid}/:
     get:
       summary: Retrieve cluster node stats
@@ -100,6 +232,77 @@ paths:
             type: array
             items:
               $ref: '#/definitions/StatPoint'
+          examples:
+             application/json: |-
+              {
+                "Avgload": 0,
+                "Cpu": 9.23076923076923,
+                "DataIp": "192.168.1.130",
+                "Disks": null,
+                "GenNumber": 1491349542598326500,
+                "Hostname": "osboxes",
+                "Id": "76964eac-c21d-44a0-a78a-ca5f99a2e43e",
+                "MemFree": 848941056,
+                "MemTotal": 4143230976,
+                "MemUsed": 3294289920,
+                "MgmtIp": "192.168.1.130",
+                "NodeData": {
+                  "STORAGE-INFO": {
+                    "LastError": "",
+                    "Random4KIops": 0,
+                    "ReadThroughput": 0,
+                    "ResourceMdUUID": "",
+                    "ResourceUUID": "",
+                    "Resources": {
+                      "0:1": {
+                        "id": "1",
+                        "last_scan": {
+                          "nanos": 7911589,
+                          "seconds": 1491349561
+                        },
+                        "online": true,
+                        "path": "/dev/sdb",
+                        "rotation_speed": "Unknown",
+                        "seq_write": 58547000,
+                        "size": 2147483648,
+                        "used": 239861760
+                      }
+                    },
+                    "ResourcesCount": 1,
+                    "ResourcesLastScan": "Resources Scan OK",
+                    "ResourcesMd": null,
+                    "ResourcesMdCount": 0,
+                    "ResourcesMdLastScan": "",
+                    "Status": "Up",
+                    "TotalSize": 2147483648,
+                    "Used": 0,
+                    "WriteThroughput": 0
+                  },
+                  "STORAGE-RUNTIME": {
+                    "MID": "76964eac-c21d-44a0-a78a-ca5f99a2e43e",
+                    "PoolUsage": {
+                      "0": {
+                        "TotalAllocated": 622770258
+                      }
+                    },
+                    "Usage": {
+                      "TotalAllocated": 622770258
+                    }
+                  },
+                  "storage_stats": {
+                    "Cpu": 23.93617021276596,
+                    "DiskAvail": 1524713390,
+                    "DiskTotal": 2147483648,
+                    "DiskUtil": 622770258,
+                    "Memory": 79,
+                    "PendingIo": 0
+                  }
+                },
+                "Pools": null,
+                "StartTime": "2017-04-04T23:45:42.598875077Z",
+                "Status": 2,
+                "Timestamp": "2017-04-05T17:50:35.662759754Z"
+              }
   /v1/cluster/{uuid}/:
     delete:
       summary: Delete node
@@ -173,23 +376,255 @@ paths:
             type: array
             items:
               $ref: '#/definitions/Volume'
+          examples:
+              application/json: |-
+                [
+                  {
+                    "id": "186672328357254033",
+                    "readonly": false,
+                    "locator": {
+                      "name": "cassandra-vol"
+                    },
+                    "ctime": "2017-03-31T19:06:58Z",
+                    "spec": {
+                      "ephemeral": false,
+                      "size": "1073741824",
+                      "format": "ext4",
+                      "block_size": "32768",
+                      "ha_level": "1",
+                      "cos": "low",
+                      "io_profile": "sequential",
+                      "dedupe": false,
+                      "snapshot_interval": 0,
+                      "shared": false,
+                      "replica_set": {},
+                      "aggregation_level": 1,
+                      "encrypted": false,
+                      "passphrase": "",
+                      "snapshot_schedule": "",
+                      "scale": 1,
+                      "sticky": false,
+                      "max_backups": 0,
+                      "backup_schedule": ""
+                    },
+                    "usage": "33964032",
+                    "last_scan": "2017-03-31T19:06:58Z",
+                    "format": "ext4",
+                    "status": "up",
+                    "state": "attached",
+                    "attached_on": "e612618a-3c8f-490d-b288-674089de7254",
+                    "device_path": "e612618a-3c8f-490d-b288-674089de7254",
+                    "replica_sets": [
+                      {
+                        "nodes": [
+                          "e612618a-3c8f-490d-b288-674089de7254"
+                        ]
+                      }
+                    ],
+                    "error": "",
+                    "runtime_state": [
+                      {
+                        "runtime_state": {
+                          "FullResyncBlocks": "[{1 0} {-1 0} {-1 0} {-1 0} {-1 0}]",
+                          "ID": "0",
+                          "ReadQuorum": "1",
+                          "ReadSet": "[1]",
+                          "ReplicaSetCurr": "[1]",
+                          "ReplicaSetNext": "[1]",
+                          "ResyncBlocks": "[{1 0} {-1 0} {-1 0} {-1 0} {-1 0}]",
+                          "RuntimeState": "clean",
+                          "TimestampBlocksPerNode": "[0 0 0 0 0]",
+                          "TimestampBlocksTotal": "0",
+                          "WriteQuorum": "1",
+                          "WriteSet": "[1]"
+                        }
+                      }
+                    ],
+                    "secure_device_path": "",
+                    "background_processing": true
+                  },
+                  {
+                    "id": "371602944628495728",
+                    "readonly": false,
+                    "locator": {
+                      "name": "mysql-vol"
+                    },
+                    "ctime": "2017-03-31T19:10:55Z",
+                    "spec": {
+                      "ephemeral": false,
+                      "size": "2147483648",
+                      "format": "ext4",
+                      "block_size": "32768",
+                      "ha_level": "1",
+                      "cos": "low",
+                      "io_profile": "sequential",
+                      "dedupe": false,
+                      "snapshot_interval": 0,
+                      "shared": false,
+                      "replica_set": {},
+                      "aggregation_level": 1,
+                      "encrypted": false,
+                      "passphrase": "",
+                      "snapshot_schedule": "",
+                      "scale": 1,
+                      "sticky": false,
+                      "max_backups": 0,
+                      "backup_schedule": ""
+                    },
+                    "usage": "67788800",
+                    "last_scan": "2017-03-31T19:10:55Z",
+                    "format": "ext4",
+                    "status": "up",
+                    "state": "attached",
+                    "attached_on": "e612618a-3c8f-490d-b288-674089de7254",
+                    "device_path": "e612618a-3c8f-490d-b288-674089de7254",
+                    "replica_sets": [
+                      {
+                        "nodes": [
+                          "e612618a-3c8f-490d-b288-674089de7254"
+                        ]
+                      }
+                    ],
+                    "error": "",
+                    "runtime_state": [
+                      {
+                        "runtime_state": {
+                          "FullResyncBlocks": "[{1 0} {-1 0} {-1 0} {-1 0} {-1 0}]",
+                          "ID": "0",
+                          "ReadQuorum": "1",
+                          "ReadSet": "[1]",
+                          "ReplicaSetCurr": "[1]",
+                          "ReplicaSetNext": "[1]",
+                          "ResyncBlocks": "[{1 0} {-1 0} {-1 0} {-1 0} {-1 0}]",
+                          "RuntimeState": "clean",
+                          "TimestampBlocksPerNode": "[0 0 0 0 0]",
+                          "TimestampBlocksTotal": "0",
+                          "WriteQuorum": "1",
+                          "WriteSet": "[1]"
+                        }
+                      }
+                    ],
+                    "secure_device_path": "",
+                    "background_processing": true
+                  },
+                  {
+                    "id": "556970537543779086",
+                    "readonly": false,
+                    "locator": {
+                      "name": "mysql_volume"
+                    },
+                    "ctime": "2017-03-30T02:02:35Z",
+                    "spec": {
+                      "ephemeral": false,
+                      "size": "1073741824",
+                      "format": "ext4",
+                      "block_size": "65536",
+                      "ha_level": "1",
+                      "cos": "low",
+                      "io_profile": "sequential",
+                      "dedupe": false,
+                      "snapshot_interval": 0,
+                      "shared": false,
+                      "aggregation_level": 1,
+                      "encrypted": false,
+                      "passphrase": "",
+                      "snapshot_schedule": "",
+                      "scale": 0,
+                      "sticky": false,
+                      "max_backups": 0,
+                      "backup_schedule": ""
+                    },
+                    "usage": "254148608",
+                    "last_scan": "2017-03-30T02:02:35Z",
+                    "format": "ext4",
+                    "status": "up",
+                    "state": "attached",
+                    "attached_on": "e612618a-3c8f-490d-b288-674089de7254",
+                    "device_path": "/dev/pxd/pxd556970537543779086",
+                    "attach_path": [
+                      "/var/lib/osd/mounts/mysql_volume"
+                    ],
+                    "replica_sets": [
+                      {
+                        "nodes": [
+                          "e612618a-3c8f-490d-b288-674089de7254"
+                        ]
+                      }
+                    ],
+                    "error": "",
+                    "runtime_state": [
+                      {
+                        "runtime_state": {
+                          "FullResyncBlocks": "[{1 0} {-1 0} {-1 0} {-1 0} {-1 0}]",
+                          "ID": "0",
+                          "ReadQuorum": "1",
+                          "ReadSet": "[1]",
+                          "ReplicaSetCurr": "[1]",
+                          "ReplicaSetNext": "[1]",
+                          "ResyncBlocks": "[{1 0} {-1 0} {-1 0} {-1 0} {-1 0}]",
+                          "RuntimeState": "clean",
+                          "TimestampBlocksPerNode": "[0 0 0 0 0]",
+                          "TimestampBlocksTotal": "0",
+                          "WriteQuorum": "1",
+                          "WriteSet": "[1]"
+                        }
+                      }
+                    ],
+                    "secure_device_path": "",
+                    "background_processing": false
+                  }
+                ]
     post:
-      summary: Create New Volume
-      description: Create new volume according to spec
-      parameters:
-        - name: spec
-          in: body
-          description: Volume spec
-          required: true
-          schema:
-            $ref: '#/definitions/VolumeCreateRequest'
-      tags:
-        - Volumes
-      responses:
-        '200':
-          description: UUID of neewly created volume
-          schema:
-            $ref: '#/definitions/VolumeCreateResponse'
+        summary: Create New Volume
+        description: Create new volume according to spec
+        parameters:
+          - name: spec
+            in: body
+            description: |
+             Volume create path example:
+             POST /v1/osd-volumes
+              Volume spec example:
+              ``` json
+                  {
+                    "locator": {
+                      "name": "cassandra-vol",
+                      "volume_labels": {
+                        "SLA": "Gold"
+                      }
+                    },
+                    "spec": {
+                      "ephemeral": false,
+                      "size": 2147483648,
+                      "format": 2,
+                      "block_size": 32768,
+                      "ha_level": 1,
+                      "cos": 1,
+                      "io_priority": "medium",
+                      "dedupe": false,
+                      "snapshot_interval": 0,
+                      "shared": false,
+                      "replica_set": {}
+                    }
+                  }
+              ```
+            required: true
+            schema:
+              $ref: '#/definitions/VolumeCreateRequest'
+        tags:
+          - Volumes
+        responses:
+          '200':
+            description: |
+             UUID of newly created volume.
+             On failures, a detailed error message will be available as below
+            schema:
+              $ref: '#/definitions/VolumeCreateResponse'
+            examples:
+             application/json: |-
+              {
+                 "id": "713030761715548077",
+                 "volume_response": {}
+                }
   /v1/osd-volumes/{uuid}/:
     get:
       summary: Inspect volume
@@ -198,7 +633,7 @@ paths:
       parameters:
         - name: uuid
           in: path
-          description: Volume UUID
+          description: Volume UUID or Name
           required: true
           type: string
           format: uuid
@@ -209,48 +644,218 @@ paths:
           description: Volume
           schema:
             $ref: '#/definitions/Volume'
+          examples:
+             application/json: |-
+              [{
+                    "id": "960911126757490171",
+                    "readonly": false,
+                    "locator": {
+                     "name": "cassandra-vol"
+                    },
+                    "ctime": "2017-03-31T18:27:23Z",
+                    "spec": {
+                     "ephemeral": false,
+                     "size": "10737418240",
+                     "format": "ext4",
+                     "block_size": "32768",
+                     "ha_level": "1",
+                     "cos": "low",
+                     "io_profile": "sequential",
+                     "dedupe": false,
+                     "snapshot_interval": 0,
+                     "shared": false,
+                     "replica_set": {
+
+                     },
+                     "aggregation_level": 1,
+                     "encrypted": false,
+                     "passphrase": "",
+                     "snapshot_schedule": "",
+                     "scale": 1,
+                     "sticky": false,
+                     "max_backups": 0,
+                     "backup_schedule": ""
+                    },
+                    "usage": "138682368",
+                    "last_scan": "2017-03-31T18:27:23Z",
+                    "format": "ext4",
+                    "status": "up",
+                    "state": "detached",
+                    "attached_on": "",
+                    "device_path": "",
+                    "replica_sets": [
+                     {
+                      "nodes": [
+                       "456b5368-f8b4-40c7-aa85-ea35e4b515a4"
+                      ]
+                     }
+                    ],
+                    "error": "",
+                    "runtime_state": [
+                     {
+                      "runtime_state": {
+                       "FullResyncBlocks": "[{0 0} {-1 0} {-1 0} {-1 0} {-1 0}]",
+                       "ID": "0",
+                       "ReadQuorum": "1",
+                       "ReadSet": "[0]",
+                       "ReplicaSetCurr": "[0]",
+                       "ReplicaSetNext": "[0]",
+                       "ResyncBlocks": "[{0 0} {-1 0} {-1 0} {-1 0} {-1 0}]",
+                       "RuntimeState": "clean",
+                       "TimestampBlocksPerNode": "[0 0 0 0 0]",
+                       "TimestampBlocksTotal": "0",
+                       "WriteQuorum": "1",
+                       "WriteSet": "[0]"
+                      }
+                     }
+                    ],
+                    "secure_device_path": "",
+                    "background_processing": true
+                    }]
+                  }
     put:
-      summary: Change volume state
-      description: |
-        Attach, detach, format, mount and unmount operations
-      parameters:
-        - name: uuid
-          in: path
-          description: Volume UUID
-          required: true
-          type: string
-          format: uuid
-        - name: state
-          in: body
-          description: Desired Volume State
-          required: true
-          schema:
-            $ref: '#/definitions/VolumeStateParams'
-      tags:
-        - Volumes
-      responses:
-        '200':
-          description: Volume reflecting current state
-          schema:
-            $ref: '#/definitions/Volume'
+        summary: Change volume state
+        description: |
+          Attach, detach, format, mount and unmount operations
+        parameters:
+          - name: uuid
+            in: path
+            description: |
+             Volume UUID or name as path parameter example:
+             PUT /v1/osd-volumes/cassandra-vol
+            required: true
+            type: string
+            format: uuid
+          - name: state
+            in: body
+            description: |
+              Desired Volume State attach example:
+               ``` json
+                   {
+                     "action": {
+                        "attach: 2"
+                        }
+                   }
+              ```
+              Desired Volume State detach example:
+               ``` json
+                   {
+                     "action": {
+                        "attach: 1"
+                        }
+                   }
+              ```
+              Desired Volume State mount example:
+               ``` json
+                   {
+                     "action": {
+                        "mount: 2",
+                        "mount_path:"/tmp""
+                        }
+                   }
+              ```
+              Desired Volume State unmount example:
+               ``` json
+                   {
+                     "action": {
+                        "mount: 1",
+                        "mount_path:"/tmp""
+                        }
+                   }
+              ```
+            required: true
+            schema:
+              $ref: '#/definitions/VolumeStateParams'
+        tags:
+          - Volumes
+        responses:
+          '200':
+            description: |
+             Operation result of Attach/Detach/Mount/Unmount
+            schema:
+              $ref: '#/definitions/VolumeStateParams'
+            examples:
+             application/json: |-
+                {
+                  "volume": {
+                    "id": "567662444761523200",
+                    "locator": {
+                      "name": "cassandra-vol"
+                    },
+                    "ctime": {
+                      "seconds": 1491195375,
+                      "nanos": 503891611
+                    },
+                    "spec": {
+                      "size": 1073741824,
+                      "format": 2,
+                      "block_size": 32768,
+                      "ha_level": 1,
+                      "cos": 1,
+                      "replica_set": {},
+                      "aggregation_level": 1,
+                      "scale": 1
+                    },
+                    "usage": 33964032,
+                    "last_scan": {
+                      "seconds": 1491195375,
+                      "nanos": 503891948
+                    },
+                    "format": 2,
+                    "status": 2,
+                    "state": 3,
+                    "attached_on": "e612618a-3c8f-490d-b288-674089de7254",
+                    "device_path": "/dev/pxd/pxd567662444761523200",
+                    "attach_path": [
+                      "/tmp"
+                    ],
+                    "replica_sets": [
+                      {
+                        "nodes": [
+                          "e612618a-3c8f-490d-b288-674089de7254"
+                        ]
+                      }
+                    ],
+                    "runtime_state": [
+                      {
+                        "runtime_state": {
+                          "FullResyncBlocks": "[{1 0} {-1 0} {-1 0} {-1 0} {-1 0}]",
+                          "ID": "0",
+                          "ReadQuorum": "1",
+                          "ReadSet": "[1]",
+                          "ReplicaSetCurr": "[1]",
+                          "ReplicaSetNext": "[1]",
+                          "ResyncBlocks": "[{1 0} {-1 0} {-1 0} {-1 0} {-1 0}]",
+                          "RuntimeState": "clean",
+                          "TimestampBlocksPerNode": "[0 0 0 0 0]",
+                          "TimestampBlocksTotal": "0",
+                          "WriteQuorum": "1",
+                          "WriteSet": "[1]"
+                        }
+                      }
+                    ]
+                  }
+                }
     delete:
-      summary: Delete Volume
-      description: |
-        Delete Volume
-      parameters:
-        - name: uuid
-          in: path
-          description: Volume UUID
-          required: true
-          type: string
-          format: uuid
-      tags:
-        - Volumes
-      responses:
-        '200':
-          description: Volume Deleted
-          schema:
-            $ref: '#/definitions/UUID'
+        summary: Delete Volume
+        description: |
+          Delete Volume
+        parameters:
+          - name: uuid
+            in: path
+            description: |
+             Volume UUID as path parameter example:
+             DELETE /v1/osd-volumes/myvolume
+            required: true
+            type: string
+            format: uuid
+        tags:
+          - Volumes
+        responses:
+          '200':
+            description: Volume Deleted
+            schema:
+              $ref: '#/definitions/UUID'
   /v1/osd-volumes/stats/:
     get:
       summary: Retrieve Volume Stats
@@ -263,6 +868,18 @@ paths:
           description: Volume Stats
           schema:
             $ref: '#/definitions/VolumeStats'
+          examples:
+            application/json: |-
+                {
+                  "bytes_used": 355749888,
+                  "io_ms": 6716,
+                  "read_bytes": 335872,
+                  "read_ms": 8,
+                  "reads": 20,
+                  "write_bytes": 402989056,
+                  "write_ms": 10400,
+                  "writes": 2484
+                }
   /v1/osd-volumes/stats/{uuid}/:
     get:
       summary: Retrieve Volume Stats
@@ -327,6 +944,39 @@ paths:
           description: Volume Alerts
           schema:
             $ref: '#/definitions/VolumeAlerts'
+          examples:
+             application/json: |-
+                [{
+                   "id": "10",
+                   "severity": "SEVERITY_TYPE_NOTIFY",
+                   "alert_type": "4",
+                   "message": "Volume (Name: h, Id: 186672328357254033) created successfully.",
+                   "timestamp": "2017-03-31T19:06:59Z",
+                   "resource_id": "186672328357254033",
+                   "resource": "RESOURCE_TYPE_VOLUME",
+                   "cleared": false,
+                   "ttl": "43200"
+                  },{
+                   "id": "11",
+                   "severity": "SEVERITY_TYPE_NOTIFY",
+                   "alert_type": "4",
+                   "message": "Volume (Name: sample, Id: 371602944628495728) created successfully.",
+                   "timestamp": "2017-03-31T19:10:56Z",
+                   "resource_id": "371602944628495728",
+                   "resource": "RESOURCE_TYPE_VOLUME",
+                   "cleared": false,
+                   "ttl": "43200"
+                  },{
+                   "id": "12",
+                   "severity": "SEVERITY_TYPE_NOTIFY",
+                   "alert_type": "4",
+                   "message": "Volume (Id: 6160761704448908 Name: 556970537543779086.snap2017-03-31T23:30:45.368202632Z) snapshot created with source volume: 556970537543779086",
+                   "timestamp": "2017-03-31T23:30:45Z",
+                   "resource_id": "6160761704448908",
+                   "resource": "RESOURCE_TYPE_VOLUME",
+                   "cleared": false,
+                   "ttl": "43200"
+                  }]
   /v1/osd-volumes/alerts/{uuid}/:
     get:
       summary: Retrieve Volume Alerts
@@ -413,23 +1063,93 @@ paths:
             type: array
             items:
               $ref: '#/definitions/VolumeSnap'
+          examples:
+             application/json: |-
+                [
+                  {
+                    "id": "6160761704448908",
+                    "source": {
+                      "parent": "556970537543779086",
+                      "seed": ""
+                    },
+                    "readonly": false,
+                    "locator": {
+                      "name": "556970537543779086.snap2017-03-31T23:30:45.368202632Z"
+                    },
+                    "ctime": "2017-03-31T23:30:45Z",
+                    "spec": {
+                      "ephemeral": false,
+                      "size": "1073741824",
+                      "format": "ext4",
+                      "block_size": "65536",
+                      "ha_level": "1",
+                      "cos": "low",
+                      "io_profile": "sequential",
+                      "dedupe": false,
+                      "snapshot_interval": 0,
+                      "shared": false,
+                      "aggregation_level": 1,
+                      "encrypted": false,
+                      "passphrase": "",
+                      "snapshot_schedule": "",
+                      "scale": 0,
+                      "sticky": false,
+                      "max_backups": 0,
+                      "backup_schedule": ""
+                    },
+                    "usage": "254148608",
+                    "last_scan": "2017-03-31T23:30:45Z",
+                    "format": "ext4",
+                    "status": "up",
+                    "state": "detached",
+                    "attached_on": "",
+                    "device_path": "",
+                    "replica_sets": [
+                      {
+                        "nodes": [
+                          "e612618a-3c8f-490d-b288-674089de7254"
+                        ]
+                      }
+                    ],
+                    "error": "",
+                    "secure_device_path": "",
+                    "background_processing": false
+                  }
+                ]
     post:
-      summary: Create New Snapshot
-      description: Create new volume according to spec
-      parameters:
-        - name: snapParams
-          in: body
-          description: Snapshot Params
-          required: true
-          schema:
-            $ref: '#/definitions/SnapCreateParams'
-      tags:
-        - Volumes
-      responses:
-        '200':
-          description: UUID of neewly created snapshot
-          schema:
-            $ref: '#/definitions/UUID'
+        summary: Create New Snapshot
+        description: Create new volume according to spec
+        parameters:
+          - name: snapParams
+            in: body
+            description: |
+              Snapshot Params example:
+               ``` json
+                   {
+                     "id":"cassandra-vol",
+                     "locator":
+                              {"name":"dbsnap"},
+                      "readonly":true
+                   }
+              ```
+            required: true
+            schema:
+              $ref: '#/definitions/SnapCreateParams'
+        tags:
+          - Volumes
+        responses:
+          '200':
+            description: UUID of newly created snapshot
+            schema:
+              $ref: '#/definitions/UUID'
+            examples:
+             application/json: |-
+                {
+                  "volume_create_response": {
+                    "id": "376740775858546908",
+                    "volume_response": {}
+                  }
+                }
 definitions:
   VolumeResponse:
     properties:
