@@ -715,7 +715,7 @@ paths:
     put:
         summary: Change volume state
         description: |
-          Attach, detach, format, mount and unmount operations
+          Attach, detach, format, mount and unmount operations. Can also be used to update size, sticky and shared properties.
         parameters:
           - name: uuid
             in: path
@@ -759,6 +759,36 @@ paths:
                      "action": {
                         "mount": 1,
                         "mount_path":"/tmp"
+                        }
+                   }
+              ```
+              Desired Volume Size update example (max_backups, snapshot_interval are set to max values to avoid update):
+               ``` json
+                   {
+                     "spec": {
+                        "size": 10737418240,
+                        "max_backups": 4294967295,
+                        "snapshot_interval": 4294967295
+                        }
+                   }
+              ```
+              Desired Volume Shared update example (max_backups, snapshot_interval are set to max values to avoid update):
+               ``` json
+                   {
+                     "spec": {
+                        "shared": true,
+                        "max_backups": 4294967295,
+                        "snapshot_interval": 4294967295
+                        }
+                   }
+              ```
+              Desired Volume Sticky update example (max_backups, snapshot_interval are set to max values to avoid update):
+               ``` json
+                   {
+                     "spec": {
+                        "sticky": true,
+                        "max_backups": 4294967295,
+                        "snapshot_interval": 4294967295
                         }
                    }
               ```
@@ -1291,7 +1321,7 @@ definitions:
       mount:
         type: integer
         format: int32
-        description: '1 to mount, 2 to unmount'
+        description: '2 to mount, 1 to unmount'
       format:
         type: integer
         format: int32
@@ -1299,7 +1329,7 @@ definitions:
       attach:
         type: integer
         format: int32
-        description: '1 to attach, 2 to detach'
+        description: '2 to attach, 1 to detach'
       mountpath:
         type: string
         description: Path to mount the device
