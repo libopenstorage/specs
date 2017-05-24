@@ -127,22 +127,7 @@ paths:
         '200':
           description: Cluster status
           schema:
-            type: string
-            enum:
-              - STATUS_NONE
-              - STATUS_INIT
-              - STATUS_OK
-              - STATUS_OFFLINE
-              - STATUS_ERROR
-              - STATUS_NOT_IN_QUORUM
-              - STATUS_DECOMMISSION
-              - STATUS_MAINTENANCE
-              - STATUS_STORAGE_DOWN
-              - STATUS_STORAGE_DEGRADED
-              - STATUS_NEEDS_REBOOT
-              - STATUS_STORAGE_REBALANCE
-              - STATUS_STORAGE_DRIVE_REPLACE
-              - STATUS_MAX
+              $ref: '#/definitions/Status'
           examples:
               application/json: |-
                 2
@@ -157,22 +142,7 @@ paths:
         '200':
           description: Node Status
           schema:
-            type: string
-            enum:
-              - STATUS_NONE
-              - STATUS_INIT
-              - STATUS_OK
-              - STATUS_OFFLINE
-              - STATUS_ERROR
-              - STATUS_NOT_IN_QUORUM
-              - STATUS_DECOMMISSION
-              - STATUS_MAINTENANCE
-              - STATUS_STORAGE_DOWN
-              - STATUS_STORAGE_DEGRADED
-              - STATUS_NEEDS_REBOOT
-              - STATUS_STORAGE_REBALANCE
-              - STATUS_STORAGE_DRIVE_REPLACE
-              - STATUS_MAX
+              $ref: '#/definitions/Status'
           examples:
               application/json: |-
                 2
@@ -1462,6 +1432,23 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/NameValuePair'
+  Status:
+          type: string
+          enum:
+            - STATUS_NONE
+            - STATUS_INIT
+            - STATUS_OK
+            - STATUS_OFFLINE
+            - STATUS_ERROR
+            - STATUS_NOT_IN_QUORUM
+            - STATUS_DECOMMISSION
+            - STATUS_MAINTENANCE
+            - STATUS_STORAGE_DOWN
+            - STATUS_STORAGE_DEGRADED
+            - STATUS_NEEDS_REBOOT
+            - STATUS_STORAGE_REBALANCE
+            - STATUS_STORAGE_DRIVE_REPLACE
+            - STATUS_MAX
   Cluster:
     properties:
       Id:
