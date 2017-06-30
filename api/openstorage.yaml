@@ -991,7 +991,7 @@ paths:
           description: Volume Requests
           schema:
             $ref: '#/definitions/VolumeActiveRequests'
-  /v1/osd-snapshots/:
+  /v1/osd-snapshot/:
     get:
       summary: List of snapshots
       description: |
