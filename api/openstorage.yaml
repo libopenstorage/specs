@@ -257,6 +257,79 @@ paths:
           description: Accepted
       tags:
         - Clusters
+
+  /v1/cluster/alerts/{resource}/:
+    get:
+      summary: Get alerts
+      description: |
+        Get All Alerts for the specified resourcetype
+      parameters:
+        - name: resource
+          in: path
+          description: Resource Type
+          required: true
+          type: number
+      responses:
+        '200':
+          description: An array of Alerts
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Alert'
+          examples:
+              application/json: |-
+                [
+                  {
+                    "id":20,
+                    "severity":3,
+                    "alert_type":53,
+                    "message":"PX is ready on Node: eac52a92-9f7d-4805-b8f7-15b4be527fe6. CLI accessible at /opt/pwx/bin/pxctl.",
+                    "timestamp":{
+                      "seconds":1502216714,
+                      "nanos":240372421
+                    },
+                    "resource_id":"paul",
+                    "resource":2,
+                    "ttl":43200
+                  },
+                  {
+                    "id":21,
+                    "severity":3,
+                    "alert_type":37,
+                    "message":"Volume (Name: test, Id: 900395599316487542) created successfully.",
+                    "timestamp":{
+                      "seconds":1502216801,
+                      "nanos":432777931
+                    },
+                    "resource_id":"900395599316487542",
+                    "resource":1,
+                    "ttl":43200
+                  }
+                ]
+      tags:
+        - Clusters
+  /v1/cluster/alerts/{resource}/{id}/:
+    put:
+      summary: Clear an alert
+      description: |
+        Clear specified alert
+      parameters:
+      - name: resource
+        in: path
+        description: Resource Type
+        required: true
+        type: number
+      - name: id
+        in: path
+        description: AlertID
+        required: true
+        type: number
+      responses:
+        '202':
+          description: Accepted
+      tags:
+        - Clusters
+
   /osd-volumes/versions/:
     get:
       summary: List of versions
@@ -897,26 +970,6 @@ paths:
           description: Volume used space
           schema:
             type: number
-  /v1/osd-volumes/alerts/{uuid}/:
-    get:
-      summary: Retrieve Volume Alerts
-      description: |
-        Retrieve Volume Alerts for specified UUID
-        **Example:** ```/v1/osd-volumes/alerts/567662444761523200/```
-      parameters:
-        - name: uuid
-          in: path
-          description: Volume UUID
-          required: true
-          type: string
-          format: uuid
-      tags:
-        - Volumes
-      responses:
-        '200':
-          description: Volume Alerts
-          schema:
-            $ref: '#/definitions/VolumeAlerts'
   /v1/osd-volumes/requests/{uuid}/:
     get:
       summary: Retrieve Volume Requests
@@ -1252,13 +1305,53 @@ definitions:
         items:
           $ref: '#/definitions/NameValuePair'
         description: Stats name and value array
-  VolumeAlerts:
+  Alert:
     properties:
-      stats:
-        type: array
-        items:
-          $ref: '#/definitions/NameValuePair'
-        description: Alerts name and description array
+      id:
+        type: integer
+        format: int64
+        description: Alert ID
+      severity:
+        type: integer
+        format: int32
+        description: |
+          '1->Alarms, 2->Warnings, 3->Notifications'
+      alertType:
+        type: integer
+        format: int32
+        description: ''
+      message:
+        type: string
+        description: 'Alert message'
+      timestamp:
+        type: object
+        properties:
+          seconds:
+            type: integer
+            format: int32
+          nanos:
+            type: integer
+            format: int32
+        description: 'Time alert was raised'
+      resource_id:
+        type: string
+        description: 'identifier for the resource'
+      resource:
+        type: integer
+        format: int32
+        description: |
+          '1->volume, 2->node, 3->cluster, 4->drivee'
+      cleared:
+        type: boolean
+        description: 'Indicates if alert has been cleared'
+      ttl:
+        type: integer
+        format: uint64
+        description: 'Time to live in seconds for this alert'
+      unique_tag:
+        type: string
+        format: uuid
+        description: 'Unique tag to identify alert for a given resource'
   VolumeSnap:
     properties:
       uuid:
@@ -1396,22 +1489,22 @@ definitions:
         items:
           $ref: '#/definitions/NameValuePair'
   Status:
-          type: string
-          enum:
-            - STATUS_NONE
-            - STATUS_INIT
-            - STATUS_OK
-            - STATUS_OFFLINE
-            - STATUS_ERROR
-            - STATUS_NOT_IN_QUORUM
-            - STATUS_DECOMMISSION
-            - STATUS_MAINTENANCE
-            - STATUS_STORAGE_DOWN
-            - STATUS_STORAGE_DEGRADED
-            - STATUS_NEEDS_REBOOT
-            - STATUS_STORAGE_REBALANCE
-            - STATUS_STORAGE_DRIVE_REPLACE
-            - STATUS_MAX
+    type: string
+    enum:
+      - STATUS_NONE
+      - STATUS_INIT
+      - STATUS_OK
+      - STATUS_OFFLINE
+      - STATUS_ERROR
+      - STATUS_NOT_IN_QUORUM
+      - STATUS_DECOMMISSION
+      - STATUS_MAINTENANCE
+      - STATUS_STORAGE_DOWN
+      - STATUS_STORAGE_DEGRADED
+      - STATUS_NEEDS_REBOOT
+      - STATUS_STORAGE_REBALANCE
+      - STATUS_STORAGE_DRIVE_REPLACE
+      - STATUS_MAX
   Cluster:
     properties:
       Id:
@@ -1441,55 +1534,3 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/Node'
-  NodeValue:
-    properties:
-      Id:
-        type: string
-        format: uuid
-      GenNumber:
-        type: number
-        format: uint64
-      LastUpdateTs:
-        type: string
-      Status:
-        type: string
-      Value:
-        type: string
-  GossipSessionInfo:
-    properties:
-      Node:
-        type: string
-      Ts:
-        type: string
-      Dir:
-        type: number
-        format: uint8
-      Err:
-        type: string
-      Op:
-        type: string
-  ClusterState:
-    properties:
-      History:
-        type: array
-        items:
-          $ref: '#/definitions/GossipSessionInfo'
-      NodeStatus:
-        type: array
-        items:
-          $ref: '#/definitions/NodeValue'
-  StatPoint:
-    properties:
-      Name:
-        type: string
-      Tags:
-        type: array
-        items:
-          $ref: '#/definitions/NameValuePair'
-      Fields:
-        type: array
-        items:
-          type: string
-      Timestamp:
-        type: number
-        format: int64
