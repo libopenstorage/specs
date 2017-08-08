@@ -282,16 +282,16 @@ paths:
       summary: List of Volumes
       description: |
         Returns information on provisioned volumes <br>
-        **By Name:**
-        ```/v1/osd-volumes?Name='mysqlvolume'```
+        **By Name:** <br>
+        ```/v1/osd-volumes?Name='mysqlvolume'```<br>
 
-        **By Label:**
-        ```/v1/osd-volumes?Label='{{"dc"="us-west"},{"department=engineering"}}'```
+        **By Label:** <br>
+        ```/v1/osd-volumes?Label='{{"dc"="us-west"},{"department=engineering"}}'``` <br>
 
-        **By ConfigLabel:**
-        ```/v1/osd-volumes?ConfigLabel='{{"format"="ext4"},{"cos"="low"}}'```
+        **By ConfigLabel:** <br>
+        ```/v1/osd-volumes?ConfigLabel='{{"format"="ext4"},{"cos"="low"}}'``` <br>
 
-        **By ID:**
+        **By ID:**  <br>
         ```/v1/osd-volumes?VolumeID='233712969767354295'``` <br>
 
         **Any combination of the above**
