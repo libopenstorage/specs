@@ -283,7 +283,7 @@ paths:
       description: |
         Returns information on provisioned volumes <br>
         **By Name:** <br>
-        ```/v1/osd-volumes?Name='mysqlvolume'```<br>
+        ```/v1/osd-volumes?Name='mysqlvolume'``` <br>
 
         **By Label:** <br>
         ```/v1/osd-volumes?Label='{{"dc"="us-west"},{"department=engineering"}}'``` <br>
@@ -1024,14 +1024,18 @@ paths:
       summary: List of snapshots
       description: |
         Returns information on snapshots <br>
-        **By Name:**
-        ```/v1/osd-snapshots?name='mysqlsnapshot'```
-        **By VolumeLabels:**
-        ```/v1/osd-snapshots?VolumeLabels='{{"dc"="us-west"},{"department=engineering"}}'```
-        **By SnapLabels:**
-        ```/v1/osd-snapshots?SnapLabels='{{"format"="ext4"},{"cos"="low"}}'```
-        **By UUID:**
+        **By Name:** <br>
+        ```/v1/osd-snapshots?name='mysqlsnapshot'```  <br>
+
+        **By VolumeLabels:**  <br>
+        ```/v1/osd-snapshots?VolumeLabels='{{"dc"="us-west"},{"department=engineering"}}'``` <br>
+
+        **By SnapLabels:** <br>
+        ```/v1/osd-snapshots?SnapLabels='{{"format"="ext4"},{"cos"="low"}}'``` <br>
+
+        **By UUID:**  <br>
         ```/v1/osd-snapshots?uuid='233712969767354295'``` <br>
+
         **Any combination of the above**
       parameters:
         - name: name
