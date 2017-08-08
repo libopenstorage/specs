@@ -284,12 +284,16 @@ paths:
         Returns information on provisioned volumes <br>
         **By Name:**
         ```/v1/osd-volumes?Name='mysqlvolume'```
+
         **By Label:**
         ```/v1/osd-volumes?Label='{{"dc"="us-west"},{"department=engineering"}}'```
+
         **By ConfigLabel:**
         ```/v1/osd-volumes?ConfigLabel='{{"format"="ext4"},{"cos"="low"}}'```
+
         **By ID:**
         ```/v1/osd-volumes?VolumeID='233712969767354295'``` <br>
+
         **Any combination of the above**
       parameters:
         - name: Name
