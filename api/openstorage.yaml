@@ -897,51 +897,6 @@ paths:
           description: Volume used space
           schema:
             type: number
-  /v1/osd-volumes/alerts/:
-    get:
-      summary: Retrieve Volume Alerts
-      description: |
-        Retrieve Volume Alerts
-      tags:
-        - Volumes
-      responses:
-        '200':
-          description: Volume Alerts
-          schema:
-            $ref: '#/definitions/VolumeAlerts'
-          examples:
-             application/json: |-
-                [{
-                   "id": "10",
-                   "severity": "SEVERITY_TYPE_NOTIFY",
-                   "alert_type": "4",
-                   "message": "Volume (Name: h, Id: 186672328357254033) created successfully.",
-                   "timestamp": "2017-03-31T19:06:59Z",
-                   "resource_id": "186672328357254033",
-                   "resource": "RESOURCE_TYPE_VOLUME",
-                   "cleared": false,
-                   "ttl": "43200"
-                  },{
-                   "id": "11",
-                   "severity": "SEVERITY_TYPE_NOTIFY",
-                   "alert_type": "4",
-                   "message": "Volume (Name: sample, Id: 371602944628495728) created successfully.",
-                   "timestamp": "2017-03-31T19:10:56Z",
-                   "resource_id": "371602944628495728",
-                   "resource": "RESOURCE_TYPE_VOLUME",
-                   "cleared": false,
-                   "ttl": "43200"
-                  },{
-                   "id": "12",
-                   "severity": "SEVERITY_TYPE_NOTIFY",
-                   "alert_type": "4",
-                   "message": "Volume (Id: 6160761704448908 Name: 556970537543779086.snap2017-03-31T23:30:45.368202632Z) snapshot created with source volume: 556970537543779086",
-                   "timestamp": "2017-03-31T23:30:45Z",
-                   "resource_id": "6160761704448908",
-                   "resource": "RESOURCE_TYPE_VOLUME",
-                   "cleared": false,
-                   "ttl": "43200"
-                  }]
   /v1/osd-volumes/alerts/{uuid}/:
     get:
       summary: Retrieve Volume Alerts
@@ -962,18 +917,6 @@ paths:
           description: Volume Alerts
           schema:
             $ref: '#/definitions/VolumeAlerts'
-  /v1/osd-volumes/requests/:
-    get:
-      summary: Retrieve Volume Requests
-      description: |
-        Retrieve Volume Requests
-      tags:
-        - Volumes
-      responses:
-        '200':
-          description: Volume Requests
-          schema:
-            $ref: '#/definitions/VolumeActiveRequests'
   /v1/osd-volumes/requests/{uuid}/:
     get:
       summary: Retrieve Volume Requests
