@@ -257,14 +257,6 @@ paths:
           description: Accepted
       tags:
         - Clusters
-  /v1/cluster/:
-    delete:
-      summary: Delete cluster
-      responses:
-        '202':
-          description: Accepted
-      tags:
-        - Clusters
   /osd-volumes/versions/:
     get:
       summary: List of versions
