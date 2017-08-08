@@ -751,6 +751,27 @@ paths:
                         }
                    }
               ```
+              Desired Volume HA-Level update example (max_backups, snapshot_interval are set to max values to avoid update and an empty replicaset to regenerate the set):
+               ``` json
+                   {
+                     "spec": {
+                        "ha_level": 3,
+                        "max_backups": 4294967295,
+                        "snapshot_interval": 4294967295,
+                        "replica_set":{}
+                        }
+                   }
+              ```
+              Desired Volume Scale update example (max_backups, snapshot_interval are set to max values to avoid update):
+               ``` json
+                   {
+                     "spec": {
+                        "scale": 3,
+                        "max_backups": 4294967295,
+                        "snapshot_interval": 4294967295
+                        }
+                   }
+              ```
             required: true
             schema:
               $ref: '#/definitions/VolumeStateParams'
