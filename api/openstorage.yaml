@@ -151,6 +151,7 @@ paths:
       summary: Retrieve cluster node stats
       description: |
         Returns stats for the specified node
+        **Example:** ```/v1/cluster/inspect/76964eac-c21d-44a0-a78a-ca5f99a2e43e/```
       parameters:
         - name: uuid
           in: path
@@ -243,6 +244,7 @@ paths:
       summary: Delete node
       description: |
         Removes a node from the cluster
+        **Example:** ```/v1/cluster/76964eac-c21d-44a0-a78a-ca5f99a2e43e/```
       parameters:
         - name: uuid
           in: path
@@ -279,26 +281,43 @@ paths:
     get:
       summary: List of Volumes
       description: |
-        Returns information on provisioned volumes
+        Returns information on provisioned volumes <br>
+        **By Name:**
+        ```/v1/osd-volumes?Name='mysqlvolume'```
+        **By Label:**
+        ```/v1/osd-volumes?Label='{{"dc"="us-west"},{"department=engineering"}}'```
+        **By ConfigLabel:**
+        ```/v1/osd-volumes?ConfigLabel='{{"format"="ext4"},{"cos"="low"}}'```
+        **By ID:**
+        ```/v1/osd-volumes?VolumeID='233712969767354295'``` <br>
+        **Any combination of the above**
       parameters:
         - name: Name
           in: query
-          description: User specified volume name
+          description: |
+            User specified volume name (Case Sensitive)
           required: false
           type: string
         - name: Label
           in: query
-          description: Comma separated name value pairs
+          description: |
+            Comma separated name value pairs
           required: false
-          type: string
+          type: array
+          items:
+            type: string
         - name: ConfigLabel
           in: query
-          description: Comma separated name value pairs
+          description: |
+            Comma separated name value pairs
           required: false
-          type: string
+          type: array
+          items:
+            type: string
         - name: VolumeID
           in: query
-          description: Volume uuid
+          description: |
+            Volume UUID
           required: false
           type: string
           format: uuid
@@ -565,6 +584,7 @@ paths:
       summary: Inspect volume
       description: |
         Retrieves volume as specified by UUID
+        **Example:** ```/v1/osd-volumes/713030761715548077/```
       parameters:
         - name: uuid
           in: path
@@ -849,6 +869,7 @@ paths:
       summary: Retrieve Volume Stats
       description: |
         Retrieve Volume Stats for specified UUID
+        **Example:** ```/v1/osd-volumes/stats/567662444761523200/```
       parameters:
         - name: uuid
           in: path
@@ -882,6 +903,7 @@ paths:
       summary: Retrieve volume used disk size
       description: |
         Retrieve volume used space size for specified UUID
+        **Example:** ```/v1/osd-volumes/usedsize/567662444761523200/```
       parameters:
         - name: uuid
           in: path
@@ -946,6 +968,7 @@ paths:
       summary: Retrieve Volume Alerts
       description: |
         Retrieve Volume Alerts for specified UUID
+        **Example:** ```/v1/osd-volumes/alerts/567662444761523200/```
       parameters:
         - name: uuid
           in: path
@@ -977,6 +1000,7 @@ paths:
       summary: Retrieve Volume Requests
       description: |
         Retrieve Volume Requests for specified UUID
+        **Example:** ```/v1/osd-volumes/requests/567662444761523200/```
       parameters:
         - name: uuid
           in: path
@@ -995,7 +1019,16 @@ paths:
     get:
       summary: List of snapshots
       description: |
-        Returns information on snapshots
+        Returns information on snapshots <br>
+        **By Name:**
+        ```/v1/osd-snapshots?name='mysqlsnapshot'```
+        **By VolumeLabels:**
+        ```/v1/osd-snapshots?VolumeLabels='{{"dc"="us-west"},{"department=engineering"}}'```
+        **By SnapLabels:**
+        ```/v1/osd-snapshots?SnapLabels='{{"format"="ext4"},{"cos"="low"}}'```
+        **By UUID:**
+        ```/v1/osd-snapshots?uuid='233712969767354295'``` <br>
+        **Any combination of the above**
       parameters:
         - name: name
           in: query
@@ -1006,12 +1039,16 @@ paths:
           in: query
           description: Comma separated volume labels
           required: false
-          type: string
+          type: array
+          items:
+            type: string
         - name: SnapLabels
           in: query
           description: Comma separated snap labels
           required: false
-          type: string
+          type: array
+          items:
+            type: string
         - name: uuid
           in: query
           description: Snap UUID
