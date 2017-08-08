@@ -857,30 +857,6 @@ paths:
             description: Volume Deleted
             schema:
               $ref: '#/definitions/UUID'
-  /v1/osd-volumes/stats/:
-    get:
-      summary: Retrieve Volume Stats
-      description: |
-        Retrieve Volume Stats
-      tags:
-        - Volumes
-      responses:
-        '200':
-          description: Volume Stats
-          schema:
-            $ref: '#/definitions/VolumeStats'
-          examples:
-            application/json: |-
-                {
-                  "bytes_used": 355749888,
-                  "io_ms": 6716,
-                  "read_bytes": 335872,
-                  "read_ms": 8,
-                  "reads": 20,
-                  "write_bytes": 402989056,
-                  "write_ms": 10400,
-                  "writes": 2484
-                }
   /v1/osd-volumes/stats/{uuid}/:
     get:
       summary: Retrieve Volume Stats
@@ -901,20 +877,6 @@ paths:
           description: Volume stats
           schema:
             $ref: '#/definitions/VolumeStats'
-  /v1/osd-volumes/usedsize/:
-    get:
-      summary: Retrieves volumes used space size
-      description: |
-        Retrieve Volume Stats
-      tags:
-        - Volumes
-      responses:
-        '200':
-          description: Volumes used space sizes
-          schema:
-            type: array
-            items:
-              type: number
   /v1/osd-volumes/usedsize/{uuid}/:
     get:
       summary: Retrieve volume used disk size
