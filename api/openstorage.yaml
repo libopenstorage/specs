@@ -606,6 +606,7 @@ paths:
             description: |
              Volume create path example:
              POST /v1/osd-volumes
+             valid "format" types : 0 (unformatted block device), 2 (ext4) and 6(xfs)
               Volume spec example:
               ``` json
                   {
