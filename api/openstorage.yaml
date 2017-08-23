@@ -838,6 +838,15 @@ paths:
                         }
                    }
               ```
+              Desired Volume Label reset example (Warning: labels are reset, name is required):
+               ``` json
+                   {
+                     "locator": {
+                        "name": "vol_name",
+                        "volume_labels":{"label1":"label1_value"}
+                     }
+                   }
+              ```
             required: true
             schema:
               $ref: '#/definitions/VolumeStateParams'
