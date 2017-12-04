@@ -350,16 +350,20 @@ paths:
         **By Name:** <br>
         ```/v1/osd-volumes?Name='mysqlvolume'``` <br>
 
-        **By Label:** <br>
-        ```/v1/osd-volumes?Label='{{"dc"="us-west"},{"department=engineering"}}'``` <br>
-
-        **By ConfigLabel:** <br>
-        ```/v1/osd-volumes?ConfigLabel='{{"format"="ext4"},{"cos"="low"}}'``` <br>
-
         **By ID:**  <br>
         ```/v1/osd-volumes?VolumeID='233712969767354295'``` <br>
 
-        **Any combination of the above**
+        ** Labels ** <br>
+        Labels require the parameters to be url-encoded
+
+        **By Label:** <br>
+        ```/v1/osd-volumes?Label={"dc":"us-west","department=engineering"}``` <br>
+        EX: curl -G -v "http://<host>/v1/osd-volumes" --data-urlencode 'Label={"dc":"us-west","department:engineering"}' <br>
+        
+        **By ConfigLabel:** <br>
+        ```/v1/osd-volumes?ConfigLabel='{{"format"="ext4"},{"cos"="low"}}'``` <br>
+        EX: curl -G -v "http://<host>/v1/osd-volumes" --data-urlencode 'ConfigLabel={"format":"ext4","cos:low"}' <br>
+
       parameters:
         - name: Name
           in: query
