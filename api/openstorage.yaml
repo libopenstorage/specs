@@ -361,7 +361,7 @@ paths:
         EX: curl -G -v "http://<host>/v1/osd-volumes" --data-urlencode 'Label={"dc":"us-west","department:engineering"}' <br>
         
         **By ConfigLabel:** <br>
-        ```/v1/osd-volumes?ConfigLabel='{{"format"="ext4"},{"cos"="low"}}'``` <br>
+        ```/v1/osd-volumes?ConfigLabel={"format":"ext4","cos":"low"}``` <br>
         EX: curl -G -v "http://<host>/v1/osd-volumes" --data-urlencode 'ConfigLabel={"format":"ext4","cos:low"}' <br>
 
       parameters:
